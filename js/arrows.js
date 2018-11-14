@@ -1,27 +1,24 @@
 'use strict';
 
 (function () {
-  const wrapper = document.createElement(`div`);
-  const arrow = document.createElement(`button`);
+  const navigationBtn =
+    `<div class="arrows__wrap">
+      <style>
+        .arrows__wrap {
+          position: absolute;
+          top: 95px;
+          left: 50%;
+          margin-left: -56px;
+        }
+        .arrows__btn {
+          background: none;
+          border: 2px solid black;
+          padding: 5px 20px;
+        }
+      </style>
+      <button class="arrows__btn"><-</button>
+      <button class="arrows__btn">-></button>
+    </div>`;
 
-  const createArrow = () => {
-    wrapper.classList.add(`arrows__wrap`);
-    wrapper.style.position = `absolute`;
-    wrapper.style.top = `95px`;
-    wrapper.style.left = `50%`;
-    wrapper.style.transform = `translateX(-50%)`;
-
-    arrow.classList.add(`arrows__btn`);
-    arrow.style.background = `none`;
-    arrow.style.border = `2px solid black`;
-    arrow.style.padding = `5px 20px`;
-    arrow.textContent = `<-`;
-    wrapper.appendChild(arrow.cloneNode(true));
-    arrow.textContent = `->`;
-    wrapper.appendChild(arrow.cloneNode(true));
-
-    return wrapper;
-  };
-  
-  document.querySelector(`body`).appendChild(createArrow());
+  document.querySelector(`body`).insertAdjacentHTML(`beforeend`, navigationBtn);
 })();

@@ -1,8 +1,10 @@
 'use strict';
 
 (function () {
-  const LEFT_ARROW = 37;
-  const RIGHT_ARROW = 39;
+  const KEYCODES = {
+    LEFT_ARROW: 37,
+    RIGHT_ARROW: 39
+  };
   const mainBlock = document.querySelector(`#main`);
   const templates = document.querySelectorAll(`template`);
 
@@ -12,13 +14,12 @@
     wrapper.appendChild(screen);
     return wrapper.cloneNode(true);
   });
-  
 
   const showScreen = (screen) => {
-    mainBlock.innerHTML = '';
+    mainBlock.innerHTML = ``;
     mainBlock.appendChild(screen);
   };
-  
+
   let currentIndex = 0;
   const selectScreen = (index) => {
     index = index < 0 ? screens.length - 2 : index;
@@ -26,18 +27,18 @@
     currentIndex = index;
     showScreen(screens[currentIndex]);
   };
-  
+
   document.addEventListener(`keydown`, (evt) => {
     switch (evt.keyCode) {
-      case LEFT_ARROW:
+      case KEYCODES.LEFT_ARROW:
         selectScreen(currentIndex - 1);
         break;
-      
-      case RIGHT_ARROW:
+
+      case KEYCODES.RIGHT_ARROW:
         selectScreen(currentIndex + 1);
         break;
     }
   });
 
-  selectScreen(0);
+  selectScreen(2);
 })();
