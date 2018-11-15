@@ -1,9 +1,9 @@
 'use strict';
 
 (function () {
-  const KEYCODES = {
-    LEFT_ARROW: 37,
-    RIGHT_ARROW: 39
+  const KeyCodes = {
+    LEFT: 37,
+    RIGHT: 39
   };
   const mainBlock = document.querySelector(`#main`);
   const templates = document.querySelectorAll(`template`);
@@ -30,15 +30,15 @@
 
   document.addEventListener(`keydown`, (evt) => {
     switch (evt.keyCode) {
-      case KEYCODES.LEFT_ARROW:
+      case KeyCodes.LEFT:
         selectScreen(currentIndex - 1);
         break;
 
-      case KEYCODES.RIGHT_ARROW:
+      case KeyCodes.RIGHT:
         selectScreen(currentIndex + 1);
         break;
     }
   });
 
-  selectScreen(2);
+  selectScreen(1);
 })();
