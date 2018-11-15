@@ -8,7 +8,7 @@
           position: absolute;
           top: 95px;
           left: 50%;
-          margin-left: -56px;
+          transform: translateX(-50%);
         }
         .arrows__btn {
           background: none;
@@ -20,5 +20,9 @@
       <button class="arrows__btn">-></button>
     </div>`;
 
-  document.querySelector(`body`).insertAdjacentHTML(`beforeend`, navigationBtn);
+  const showArrow = () => {
+    document.querySelector(`body`).insertAdjacentHTML(`beforeend`, navigationBtn);
+  };
+
+  showArrow();
 })();
