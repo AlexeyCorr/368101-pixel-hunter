@@ -16,8 +16,8 @@
           padding: 5px 20px;
         }
       </style>
-      <button class="arrows__btn"><-</button>
-      <button class="arrows__btn">-></button>
+      <button class="arrows__btn arrows__btn--left"><-</button>
+      <button class="arrows__btn arrows__btn--right">-></button>
     </div>`;
 
   const showArrow = () => {

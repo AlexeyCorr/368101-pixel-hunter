@@ -7,6 +7,7 @@
   };
   const mainBlock = document.querySelector(`#main`);
   const templates = document.querySelectorAll(`template`);
+  const arrowButtons = document.querySelectorAll(`.arrows__btn`);
 
   const screens = Array.from(templates).map((it) => {
     const wrapper = document.createElement(`div`);
@@ -28,7 +29,7 @@
     showScreen(screens[currentIndex]);
   };
 
-  document.addEventListener(`keydown`, (evt) => {
+  const onArrowKeydown = (evt) => {
     switch (evt.keyCode) {
       case KeyCodes.LEFT:
         selectScreen(currentIndex - 1);
@@ -38,7 +39,23 @@
         selectScreen(currentIndex + 1);
         break;
     }
+  };
+
+  const onButtonNavClick = (evt) => {
+    evt.preventDefault();
+    const target = evt.target;
+    if (target.classList.contains(`arrows__btn--left`)) {
+      selectScreen(currentIndex - 1);
+    } else if (target.classList.contains(`arrows__btn--right`)) {
+      selectScreen(currentIndex + 1);
+    }
+  };
+
+  arrowButtons.forEach((it) => {
+    it.addEventListener(`click`, onButtonNavClick);
   });
+
+  document.addEventListener(`keydown`, onArrowKeydown);
 
   selectScreen(1);
 })();
