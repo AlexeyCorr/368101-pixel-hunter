@@ -1,5 +1,5 @@
-import {render, showScreen} from './util.js';
-import greetingScreen from './greeting-screen.js';
+import {render} from './util.js';
+//import greetingScreen from './greeting-screen.js';
 
 const template =
   `<button class="back">
@@ -17,7 +17,8 @@ const element = render(template);
 const buttonBack = element.querySelector(`.back`);
 buttonBack.addEventListener(`click`, (evt) => {
   evt.preventDefault();
-  showScreen(greetingScreen);
+  console.log(`hi`);
+  //showScreen(greetingScreen);
 });
 
 export default element;
