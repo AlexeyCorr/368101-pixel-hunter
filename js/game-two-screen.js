@@ -1,5 +1,7 @@
 import {render, checkAnswers} from './util';
 import gemeThreeScreen from './game-three-screen';
+import addReturnButton from './button-back';
+import addArrows from './arrows';
 
 const template =
   `<header class="header">
@@ -40,6 +42,10 @@ const template =
   </section>`;
 
 const element = render(template);
+
+addReturnButton(element.querySelector(`.header`));
+
+addArrows(element.querySelector(`section`));
 
 const radioButtons = element.querySelectorAll(`input[type=radio]`);
 checkAnswers(radioButtons, 1, gemeThreeScreen)

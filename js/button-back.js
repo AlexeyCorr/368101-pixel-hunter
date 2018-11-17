@@ -1,5 +1,5 @@
-import {render} from './util';
-//import greetingScreen from './greeting-screen';
+import {render, showScreen} from './util';
+import greetingScreen from './greeting-screen';
 
 const template =
   `<button class="back">
@@ -15,14 +15,16 @@ const template =
 const element = render(template);
 
 const returnButton = element.querySelector(`.back`);
-returnButton.addEventListener(`click`, (evt) => {
-  evt.preventDefault();
-  console.log(`hi`);
-  //showScreen(greetingScreen);
-});
 
-// const addReturnButton = (position) => {
-//   position.insertAdjacentElement(`afterbegin`, returnButton);
-// };
 
-export default element;
+const addReturnButton = (position) => {
+  const button = returnButton.cloneNode(true);
+  button.addEventListener(`click`, (evt) => {
+    evt.preventDefault();
+    console.log(`hi`);
+    showScreen(greetingScreen);
+  });
+  position.insertAdjacentElement(`afterbegin`, button);
+};
+
+export default addReturnButton;

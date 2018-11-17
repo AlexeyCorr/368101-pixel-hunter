@@ -1,6 +1,7 @@
 import {render, showScreen} from './util';
 import gameOneScreen from './game-one-screen';
-import returnButton from './button-back';
+import addReturnButton from './button-back';
+import addArrows from './arrows';
 
 const template =
   `<header class="header">
@@ -24,7 +25,10 @@ const template =
 
 const element = render(template);
 
-console.log(returnButton);
+addReturnButton(element.querySelector(`.header`));
+
+addArrows(element.querySelector(`section`));
+
 const buttonContinue = element.querySelector(`.rules__button`);
 buttonContinue.addEventListener(`click`, (evt) => {
   evt.preventDefault();
@@ -32,7 +36,7 @@ buttonContinue.addEventListener(`click`, (evt) => {
 });
 
 const nameField = element.querySelector(`.rules__input`);
-nameField.addEventListener(`input`, (evt) => {
+nameField.addEventListener(`input`, () => {
   buttonContinue.disabled = nameField.value.length > 0 ? false : true;
 });
 

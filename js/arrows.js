@@ -22,4 +22,9 @@ const template =
 
 const element = render(template);
 
-export default element;
+const addArrows = (position) => {
+  const arrowsBlock = element.cloneNode(true);
+  position.appendChild(arrowsBlock);
+};
+
+export default addArrows;
