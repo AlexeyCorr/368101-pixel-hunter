@@ -132,4 +132,8 @@
   &:active {
     border-color: $link-active-color;
   }
+
+  &--selected {
+    border-color: $link-hover-color;
+  }
 }
