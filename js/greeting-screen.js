@@ -1,5 +1,5 @@
-import {render, showScreen} from './util.js';
-import rulesScreen from './rules-screen.js';
+import {render, showScreen} from './util';
+import rulesScreen from './rules-screen';
 
 const template =
   `<section class="greeting central--blur">
@@ -25,9 +25,9 @@ const template =
 
 const element = render(template);
 
-const buttonContinue = element.querySelector(`.greeting__continue`);
+const continueButton = element.querySelector(`.greeting__continue`);
 
-buttonContinue.addEventListener(`click`, (evt) => {
+continueButton.addEventListener(`click`, (evt) => {
   evt.preventDefault();
   showScreen(rulesScreen);
 });

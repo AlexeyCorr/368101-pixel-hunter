@@ -1,5 +1,5 @@
-import {render, showScreen} from './util.js';
-import greetingScreen from './greeting-screen.js';
+import {render, showScreen} from './util';
+import greetingScreen from './greeting-screen';
 
 const template =
   `<section class="intro">
@@ -9,9 +9,9 @@ const template =
 
 const element = render(template);
 
-const buttonContinue = element.querySelector(`.intro__asterisk`);
+const continueButton = element.querySelector(`.intro__asterisk`);
 
-buttonContinue.addEventListener(`click`, (evt) => {
+continueButton.addEventListener(`click`, (evt) => {
   evt.preventDefault();
   showScreen(greetingScreen);
 });

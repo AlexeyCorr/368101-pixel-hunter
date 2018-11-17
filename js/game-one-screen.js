@@ -1,6 +1,5 @@
-import {render, checkAnswers} from './util.js';
-import gemeTwoScreen from './game-two-screen.js';
-import buttonBack from './button-back.js';
+import {render, checkAnswers} from './util';
+import gemeTwoScreen from './game-two-screen';
 
 const template =
   `<header class="header">
@@ -52,10 +51,6 @@ const template =
   </section>`;
 
 const element = render(template);
-
-console.log(buttonBack);
-console.log(element.querySelector(`.header`));
-element.querySelector(`.header`).insertAdjacentElement(`afterbegin`, buttonBack);
 
 const radioButtons = element.querySelectorAll(`input[type=radio]`);
 checkAnswers(radioButtons, 2, gemeTwoScreen);

@@ -1,6 +1,5 @@
-import {render, checkAnswers} from './util.js';
-import gemeThreeScreen from './game-three-screen.js';
-import buttonBack from './button-back.js';
+import {render, checkAnswers} from './util';
+import gemeThreeScreen from './game-three-screen';
 
 const template =
   `<header class="header">
@@ -41,8 +40,6 @@ const template =
   </section>`;
 
 const element = render(template);
-
-element.querySelector(`.header`).insertAdjacentElement(`afterbegin`, buttonBack);
 
 const radioButtons = element.querySelectorAll(`input[type=radio]`);
 checkAnswers(radioButtons, 1, gemeThreeScreen)

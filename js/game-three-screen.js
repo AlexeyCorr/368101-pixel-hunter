@@ -1,5 +1,5 @@
-import {render} from './util.js';
-import buttonBack from './button-back.js';
+import {render, showScreen} from './util';
+import resultScreen from './result-screen';
 
 const template =
   `<header class="header">
@@ -16,7 +16,7 @@ const template =
       <div class="game__option">
         <img src="http://placehold.it/304x455" alt="Option 1" width="304" height="455">
       </div>
-      <div class="game__option  game__option--selected">
+      <div class="game__option">
         <img src="http://placehold.it/304x455" alt="Option 2" width="304" height="455">
       </div>
       <div class="game__option">
@@ -39,6 +39,13 @@ const template =
 
 const element = render(template);
 
-element.querySelector(`.header`).insertAdjacentElement(`afterbegin`, buttonBack);
+const optionAnswers = element.querySelectorAll(`.game__option`);
+optionAnswers.forEach((it) => {
+  it.addEventListener(`click`, (evt) => {
+    evt.preventDefault();
+    it.classList.add('game__option--selected');
+    showScreen(resultScreen);
+  });
+});
 
 export default element;

@@ -1,5 +1,4 @@
-import {render, showScreen} from './util.js';
-//import gemeTwoScreen from './rules-screen.js';
+import {render} from './util';
 
 const template =
   `<section class="modal">
@@ -17,12 +16,5 @@ const template =
   </section>`;
 
 const element = render(template);
-
-// const buttonContinue = element.querySelector(`.greeting__continue`);
-
-// buttonContinue.addEventListener(`click`, (evt) => {
-//   evt.preventDefault();
-//   showScreen(rules);
-// });
 
 export default element;

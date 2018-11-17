@@ -1,6 +1,6 @@
-import {render, showScreen} from './util.js';
-import gameOneScreen from './game-one-screen.js';
-import buttonBack from './button-back.js';
+import {render, showScreen} from './util';
+import gameOneScreen from './game-one-screen';
+import returnButton from './button-back';
 
 const template =
   `<header class="header">
@@ -24,8 +24,7 @@ const template =
 
 const element = render(template);
 
-element.querySelector(`.header`).insertAdjacentElement(`afterbegin`, buttonBack);
-
+console.log(returnButton);
 const buttonContinue = element.querySelector(`.rules__button`);
 buttonContinue.addEventListener(`click`, (evt) => {
   evt.preventDefault();

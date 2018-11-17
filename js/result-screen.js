@@ -1,4 +1,4 @@
-import {render, showScreen} from './util.js';
+import {render} from './util';
 
 const template =
   `<header class="header">
