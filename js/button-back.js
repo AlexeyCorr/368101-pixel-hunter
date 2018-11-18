@@ -16,12 +16,10 @@ const element = render(template);
 
 const returnButton = element.querySelector(`.back`);
 
-
 const addReturnButton = (position) => {
   const button = returnButton.cloneNode(true);
   button.addEventListener(`click`, (evt) => {
     evt.preventDefault();
-    console.log(`hi`);
     showScreen(greetingScreen);
   });
   position.insertAdjacentElement(`afterbegin`, button);

@@ -1,7 +1,6 @@
 import {render, checkAnswers} from './util';
 import gemeTwoScreen from './game-two-screen';
 import addReturnButton from './button-back';
-import addArrows from './arrows';
 
 const template =
   `<header class="header">
@@ -55,8 +54,6 @@ const template =
 const element = render(template);
 
 addReturnButton(element.querySelector(`.header`));
-
-addArrows(element.querySelector(`section`));
 
 const radioButtons = element.querySelectorAll(`input[type=radio]`);
 checkAnswers(radioButtons, 2, gemeTwoScreen);

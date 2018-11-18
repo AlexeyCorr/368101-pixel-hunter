@@ -22,5 +22,4 @@ const checkAnswers = (radioButtons, numberQuestions, nextScreen) => {
   });
 };
 
-
 export {render, showScreen, checkAnswers};

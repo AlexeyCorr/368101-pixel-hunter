@@ -1,7 +1,6 @@
 import {render, showScreen} from './util';
 import gameOneScreen from './game-one-screen';
 import addReturnButton from './button-back';
-import addArrows from './arrows';
 
 const template =
   `<header class="header">
@@ -26,8 +25,6 @@ const template =
 const element = render(template);
 
 addReturnButton(element.querySelector(`.header`));
-
-addArrows(element.querySelector(`section`));
 
 const buttonContinue = element.querySelector(`.rules__button`);
 buttonContinue.addEventListener(`click`, (evt) => {

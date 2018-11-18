@@ -1,4 +1,4 @@
-import {render, showScreen} from './util';
+import {render} from './util';
 
 const template =
   `<section class="modal">

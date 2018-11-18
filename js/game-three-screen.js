@@ -1,7 +1,6 @@
 import {render, showScreen} from './util';
 import resultScreen from './result-screen';
 import addReturnButton from './button-back';
-import addArrows from './arrows';
 
 const template =
   `<header class="header">
@@ -43,13 +42,11 @@ const element = render(template);
 
 addReturnButton(element.querySelector(`.header`));
 
-addArrows(element.querySelector(`section`));
-
 const optionAnswers = element.querySelectorAll(`.game__option`);
 optionAnswers.forEach((it) => {
   it.addEventListener(`click`, (evt) => {
     evt.preventDefault();
-    it.classList.add('game__option--selected');
+    it.classList.add(`game__option--selected`);
     showScreen(resultScreen);
   });
 });
