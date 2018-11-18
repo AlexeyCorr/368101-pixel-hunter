@@ -15,8 +15,12 @@ const checkAnswers = (radioButtons, numberQuestions, nextScreen) => {
   radioButtons.forEach((it) => {
     it.addEventListener(`change`, () => {
       if (it.checked) {
-        answers.indexOf(it.name) < 0 ? answers.push(it.name) : '';
-        answers.length === numberQuestions ? showScreen(nextScreen) : '';
+        if (answers.indexOf(it.name) < 0) {
+          answers.push(it.name)
+        }
+        if (answers.length === numberQuestions) {
+          showScreen(nextScreen)
+        }
       }
     });
   });
