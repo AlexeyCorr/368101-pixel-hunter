@@ -16,10 +16,10 @@ const checkAnswers = (radioButtons, numberQuestions, nextScreen) => {
     it.addEventListener(`change`, () => {
       if (it.checked) {
         if (answers.indexOf(it.name) < 0) {
-          answers.push(it.name)
+          answers.push(it.name);
         }
         if (answers.length === numberQuestions) {
-          showScreen(nextScreen)
+          showScreen(nextScreen);
         }
       }
     });
