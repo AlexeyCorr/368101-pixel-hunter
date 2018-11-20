@@ -1,4 +1,4 @@
 import {showScreen} from './util';
-import introScreen from './intro-screen';
+import {introScreen} from './screens/index';
 
 showScreen(introScreen);
