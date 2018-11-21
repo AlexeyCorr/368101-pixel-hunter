@@ -1,5 +1,5 @@
-import {render, showScreen} from './util';
-import rulesScreen from './rules-screen';
+import {render, showScreen} from './../util';
+import {rulesScreen} from './index';
 
 const template =
   `<section class="greeting central--blur">

@@ -1,5 +1,5 @@
-import {render, showScreen} from './util';
-import greetingScreen from './greeting-screen';
+import {render, showScreen} from './../util';
+import {greetingScreen} from './../screens/index';
 
 const template =
   `<button class="back">

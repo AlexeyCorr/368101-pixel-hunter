@@ -1,6 +1,6 @@
-import {render, showScreen} from './util';
-import gameOneScreen from './game-one-screen';
-import addReturnButton from './button-back';
+import {render, showScreen} from './../util';
+import {gameOneScreen} from './index';
+import {addReturnButton} from './../components/index';
 
 const template =
   `<header class="header">

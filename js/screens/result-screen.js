@@ -1,5 +1,5 @@
-import {render} from './util';
-import addReturnButton from './button-back';
+import {render} from './../util';
+import {addReturnButton} from './../components/index';
 
 const template =
   `<header class="header">

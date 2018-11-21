@@ -1,6 +1,6 @@
-import {render, checkAnswers} from './util';
-import gemeTwoScreen from './game-two-screen';
-import addReturnButton from './button-back';
+import {render, checkAnswers} from './../util';
+import {gameTwoScreen} from './index';
+import {addReturnButton} from './../components/index';
 
 const template =
   `<header class="header">
@@ -56,6 +56,6 @@ const element = render(template);
 addReturnButton(element.querySelector(`.header`));
 
 const radioButtons = element.querySelectorAll(`input[type=radio]`);
-checkAnswers(radioButtons, 2, gemeTwoScreen);
+checkAnswers(radioButtons, 2, gameTwoScreen);
 
 export default element;
