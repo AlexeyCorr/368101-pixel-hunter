@@ -1,6 +1,6 @@
 import {InitialGame, Points} from './constants';
 
-const sumPoints = (answers, lives) => {
+export const sumPoints = (answers, lives) => {
   if (answers.length < InitialGame.QUESTIONS || lives < 1) {
     return -1;
   }
@@ -20,5 +20,3 @@ const sumPoints = (answers, lives) => {
       return points;
     }, lives * Points.LIVES);
 };
-
-export {sumPoints};

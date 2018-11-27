@@ -1,9 +1,12 @@
 import {assert} from 'chai';
-import {sumPoints} from './game-points';
-import {Points} from './constants';
+import {sumPoints} from './../sum-points';
+import {Points} from './../constants';
 
 const games = (repeat, result) => new Array(repeat).fill(result);
-const points = ({lives = 0, normal = 0, quick = 0, slow = 0} = {}) => lives * Points.LIVES + normal * Points.NORMAL_ANSWER + quick * Points.QUICK_ANSWER + slow * Points.SLOW_ANSWER;
+const points = ({lives = 0, normal = 0, quick = 0, slow = 0} = {}) => {
+  let sum = lives * Points.LIVES + normal * Points.NORMAL_ANSWER + quick * Points.QUICK_ANSWER + slow * Points.SLOW_ANSWER;
+  return sum;
+};
 
 describe(`sumPoints`, () => {
   const testAnswers = [
@@ -22,7 +25,7 @@ describe(`sumPoints`, () => {
     {
       lives: 3,
       answers: [...games(10, {isCorrect: true, time: 15})],
-      expected: 1150,
+      expected: points({lives: 3, normal: 10}),
       message: `the speed of answers is normal and lives is full`
     },
     {
