@@ -1,4 +1,7 @@
-export const countTime = (time) => {
+const MAX_TIME = 30;
 
-  return time;
+export const countTime = () => {
+  let time = MAX_TIME;
+
+  return time - 1;
 };
