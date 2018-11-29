@@ -1,5 +1,5 @@
-import {render, showScreen} from './../util';
-import {greetingScreen} from './../screens/index';
+import {render} from './../util';
+import {openConfirmPopup} from './../popups/index';
 
 const template =
   `<button class="back">
@@ -20,7 +20,7 @@ const addReturnButton = (position) => {
   const button = returnButton.cloneNode(true);
   button.addEventListener(`click`, (evt) => {
     evt.preventDefault();
-    showScreen(greetingScreen);
+    openConfirmPopup();
   });
   position.insertAdjacentElement(`afterbegin`, button);
 };
