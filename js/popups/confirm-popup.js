@@ -1,5 +1,5 @@
 import {render, showScreen} from './../util';
-import {greetingScreen} from './../screens/index'
+import {greetingScreen} from './../screens/index';
 
 const ESC_KEYCODE = 27;
 
@@ -41,7 +41,7 @@ const onPopupClose = () => {
 
 const onPopupConfirm = (evt) => {
   evt.preventDefault();
-  showScreen(greetingScreen)
+  showScreen(greetingScreen);
 };
 
 closeButton.addEventListener(`click`, onPopupClose);

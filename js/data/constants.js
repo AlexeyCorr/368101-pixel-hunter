@@ -1,6 +1,7 @@
 const InitialGame = Object.freeze({
   QUESTIONS: 10,
-  LIVES: 3
+  LIVES: 3,
+  TIME: 30
 });
 const Points = {
   LIVES: 50,
