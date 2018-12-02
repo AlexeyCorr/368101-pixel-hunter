@@ -1,18 +1,15 @@
 import {render} from './../util';
+import {InitialGame} from './../data/constants';
+import {answerStats} from './../data/data';
 
-const answerTemplate =
-`<ul class="stats">
-  <li class="stats__result stats__result--wrong"></li>
-  <li class="stats__result stats__result--slow"></li>
-  <li class="stats__result stats__result--fast"></li>
-  <li class="stats__result stats__result--correct"></li>
-  <li class="stats__result stats__result--unknown"></li>
-  <li class="stats__result stats__result--unknown"></li>
-  <li class="stats__result stats__result--unknown"></li>
-  <li class="stats__result stats__result--unknown"></li>
-  <li class="stats__result stats__result--unknown"></li>
-  <li class="stats__result stats__result--unknown"></li>
-</ul>`;
+const answerTemplate = `<ul class="stats">
+  ${answerStats.map((it) =>
+    `<li class="stats__result stats__result--${it}"></li>`
+  ).join(``)}
+  ${new Array(InitialGame.QUESTIONS - answerStats.length)
+    .fill(`<li class="stats__result stats__result--unknown"></li>`)
+    .join(``)}
+  </ul>`;
 
 const element = render(answerTemplate);
 

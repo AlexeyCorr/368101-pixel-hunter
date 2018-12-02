@@ -7,7 +7,7 @@ import {getOptionTemplate} from './option-template';
 import statsTemplate from './stats-list';
 import gameThreeScreen from './game-three-screen';
 import gameTwoScreen from './game-two-screen';
-import gameOneScreen from './game-one-screen';
+import game from './game';
 
 export {
   introScreen,
@@ -16,7 +16,7 @@ export {
   headerTemplate,
   statsTemplate,
   getOptionTemplate,
-  gameOneScreen,
+  game,
   gameTwoScreen,
   gameThreeScreen,
   resultScreen

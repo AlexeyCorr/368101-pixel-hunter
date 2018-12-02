@@ -10,4 +10,11 @@ const Points = {
   SLOW_ANSWER: 50
 };
 
-export {InitialGame, Points};
+const Stats = {
+  QUICK_ANSWER: `fast`,
+  SLOW_ANSWER: `slow`,
+  NORMAL_ANSWER: `correct`,
+  WRONG_ANSWER: `wrong`
+};
+
+export {InitialGame, Points, Stats};

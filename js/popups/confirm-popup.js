@@ -30,17 +30,18 @@ const onPopupEscDown = function (evt) {
 };
 
 const openConfirmPopup = () => {
-  document.querySelector(`#main`).appendChild(element);
+  document.querySelector(`body`).appendChild(element);
   document.addEventListener(`keydown`, onPopupEscDown);
 };
 
 const onPopupClose = () => {
-  document.querySelector(`#main`).removeChild(element);
+  document.querySelector(`body`).removeChild(element);
   document.removeEventListener(`keydown`, onPopupEscDown);
 };
 
 const onPopupConfirm = (evt) => {
   evt.preventDefault();
+  document.querySelector(`body`).removeChild(element);
   showScreen(greetingScreen);
 };
 

@@ -11,11 +11,11 @@ const showScreen = (screen) => {
 };
 
 const checkAnswers = (radioButtons, numberQuestions, nextScreen) => {
-  let answers = new Set();
+  const answers = new Set();
   radioButtons.forEach((it) => {
     it.addEventListener(`change`, () => {
       if (it.checked) {
-          answers.add(it.name);
+        answers.add(it.name);
         if ([...answers].length === numberQuestions) {
           showScreen(nextScreen);
         }
