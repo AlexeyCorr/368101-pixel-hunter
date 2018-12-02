@@ -1,4 +1,4 @@
-export const getOptionTemplate = {
+const template = {
   'type-1': (image, number) => {
     return `<img src="${image || `http://placehold.it/468x458`}" alt="Option 1" width="468" height="458">
       <label class="game__answer game__answer--photo">
@@ -25,3 +25,5 @@ export const getOptionTemplate = {
     return `<img src="${image || `http://placehold.it/304x455`}" alt="Option ${number}" width="304" height="455">`;
   }
 };
+
+export default template;

@@ -1,8 +1,11 @@
+const NUMBER_QUESTIONS = 10;
+
 const InitialGame = Object.freeze({
-  QUESTIONS: 10,
+  LEVEL: 0,
   LIVES: 3,
   TIME: 30
 });
+
 const Points = {
   LIVES: 50,
   QUICK_ANSWER: 150,
@@ -17,4 +20,4 @@ const Stats = {
   WRONG_ANSWER: `wrong`
 };
 
-export {InitialGame, Points, Stats};
+export {InitialGame, Points, Stats, NUMBER_QUESTIONS};

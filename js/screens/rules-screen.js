@@ -1,9 +1,10 @@
 import {render, showScreen} from './../util';
-import {game} from './index';
-import {addReturnButton} from './../components/index';
+import {game, newGame} from './index';
+import {templateButtonBack} from './../components/index';
 
 const template =
   `<header class="header">
+    ${templateButtonBack()}
   </header>
   <section class="rules">
     <h2 class="rules__title">Правила</h2>
@@ -24,11 +25,10 @@ const template =
 
 const element = render(template);
 
-addReturnButton(element.querySelector(`.header`));
-
 const buttonContinue = element.querySelector(`.rules__button`);
 buttonContinue.addEventListener(`click`, (evt) => {
   evt.preventDefault();
+  newGame();
   showScreen(game);
 });
 

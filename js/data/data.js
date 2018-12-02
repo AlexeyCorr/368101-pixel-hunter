@@ -1,4 +1,4 @@
-const MAX_LEVELS = 10;
+import {NUMBER_QUESTIONS} from './constants';
 
 const pictures = {
   paintings: [
@@ -13,14 +13,14 @@ const pictures = {
   ]
 };
 
-const gameTypes = [`type-1`, `type-2`, `type-3`];
-
 const getRandomArr = (arr, num) => {
   return arr.map((a) => ({sort: Math.random(), value: a}))
   .sort((a, b) => a.sort - b.sort)
   .map((a) => a.value)
   .slice(num);
 };
+
+const gameTypes = [`type-1`, `type-2`, `type-3`];
 
 export const gameData = {
   'type-1': {
@@ -40,11 +40,10 @@ export const gameData = {
   },
   getLevels() {
     const levels = [];
-    for (let i = 0; i < MAX_LEVELS; i++) {
+    for (let i = 0; i < NUMBER_QUESTIONS; i++) {
       levels.push(getRandomArr(gameTypes, -1).join(``));
     }
     return levels;
-  }
+  },
+  'answerStats': [`slow`, `wrong`, `slow`, `fast`, `correct`]
 };
-
-export const answerStats = [`slow`, `wrong`, `slow`, `fast`, `correct`];
