@@ -1,25 +1,31 @@
 import {render, showScreen} from './../util';
 import {gameData} from './../data/data';
-import {NUMBER_QUESTIONS} from './../data/constants';
-import {templateOption} from './../components/index';
-import {templateLives} from './../components/index';
-import {templateTime} from './../components/index';
-import {templateStats} from './../components/index';
-import {templateButtonBack} from './../components/index';
-import {resultScreen} from './index';
+import {
+  getGameTypes
+} from './../data/game-data';
+import {
+  InitialGame,
+  NUMBER_QUESTIONS
+} from './../data/constants';
+import {
+  templateOption,
+  templateLives,
+  templateTime,
+  templateStats,
+  templateButtonBack
+} from './../components/index';
+import resultScreen from './result-screen';
 
 let gameTypes;
 let gameState;
 
 export const newGame = () => {
-  gameTypes = gameData.getLevels();
-  gameState = {
-    level: 0,
-    lives: 3,
-    points: 0,
-    time: 30,
-    answers: []
-  };
+  gameTypes = getGameTypes();
+  gameState = Object.assign({}, InitialGame);
+
+  const gameContainerElement = render();
+  const headerElement = render();
+  const levelElement = render();
 };
 
 newGame();

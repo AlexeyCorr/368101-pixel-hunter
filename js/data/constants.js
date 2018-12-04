@@ -1,23 +1,21 @@
-const NUMBER_QUESTIONS = 10;
+export const NUMBER_QUESTIONS = 10;
 
-const InitialGame = Object.freeze({
-  LEVEL: 0,
-  LIVES: 3,
-  TIME: 30
+export const InitialGame = Object.freeze({
+  level: 0,
+  lives: 3,
+  time: 30
 });
 
-const Points = {
-  LIVES: 50,
-  QUICK_ANSWER: 150,
-  NORMAL_ANSWER: 100,
-  SLOW_ANSWER: 50
+export const PointsAnwser = {
+  CORRECT: 100,
+  QUICK: 150,
+  SLOW: 50,
+  BONUS: 50
 };
 
-const Stats = {
-  QUICK_ANSWER: `fast`,
-  SLOW_ANSWER: `slow`,
-  NORMAL_ANSWER: `correct`,
-  WRONG_ANSWER: `wrong`
+export const ResultType = {
+  CORRECT: `correct`,
+  QUICK: `fast`,
+  SLOW: `slow`,
+  WRONG: `wrong`
 };
-
-export {InitialGame, Points, Stats, NUMBER_QUESTIONS};

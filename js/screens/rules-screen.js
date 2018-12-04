@@ -1,5 +1,6 @@
 import {render, showScreen} from './../util';
-import {game, newGame} from './index';
+import game from './game';
+import {newGame} from './game';
 import {templateButtonBack} from './../components/index';
 
 const template =

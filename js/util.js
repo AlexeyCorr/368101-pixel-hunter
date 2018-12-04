@@ -1,11 +1,11 @@
-const render = (template) => {
+export const render = (template = ``) => {
   const wrapper = document.createElement(`div`);
-  wrapper.innerHTML = template;
+  wrapper.innerHTML = template.trim();;
   return wrapper;
 };
 
 const container = document.querySelector(`#main`);
-const showScreen = (screen) => {
+export const showScreen = (screen) => {
   container.innerHTML = ``;
   container.appendChild(screen);
 };
@@ -22,10 +22,4 @@ const checkAnswers = (radioButtons, numberQuestions, nextScreen) => {
       }
     });
   });
-};
-
-export {
-  render,
-  showScreen,
-  checkAnswers
 };
