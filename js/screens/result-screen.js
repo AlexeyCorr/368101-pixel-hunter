@@ -1,5 +1,4 @@
 import {render} from './../util';
-import {addReturnButton} from './../components/index';
 
 const template =
   `<header class="header">
@@ -106,7 +105,5 @@ const template =
   </section>`;
 
 const element = render(template);
-
-addReturnButton(element.querySelector(`.header`));
 
 export default element;

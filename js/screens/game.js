@@ -1,54 +1,42 @@
-import {render, showScreen} from './../util';
-import {gameData} from './../data/data';
 import {
-  getGameTypes
+  render,
+  renderHeader,
+  showScreen} from './../util';
+import {
+  getGameTypes,
+  gameData
 } from './../data/game-data';
 import {
   InitialGame,
+  Types,
   NUMBER_QUESTIONS
 } from './../data/constants';
 import {
   templateOption,
   templateLives,
   templateTime,
-  templateStats,
+  templateGame,
   templateButtonBack
-} from './../components/index';
+} from './../template/index';
 import resultScreen from './result-screen';
 
 let gameTypes;
 let gameState;
 
-export const newGame = () => {
+export const newtGame = () => {
   gameTypes = getGameTypes();
   gameState = Object.assign({}, InitialGame);
 
-  const gameContainerElement = render();
-  const headerElement = render();
-  const levelElement = render();
+  let data = gameData[Types[gameTypes[gameState.level]]];
+
+  console.log(data);
+
+  console.log(templateGame(data, gameState.stats));
 };
 
-newGame();
-
-const gameTemplate = (state) =>
-  `<header class="header">
-    ${templateButtonBack()}
-    ${templateTime(state)}
-    ${templateLives(state)}
-  </header>
-  <section class="game">
-    <p class="game__task">${gameData[gameTypes[state.level]].description}</p>
-    <form class="game__content ${gameData[gameTypes[state.level]].view}">
-      ${gameData[gameTypes[state.level]].photos.map((photo, number) => `<div class="game__option">
-        ${templateOption[gameTypes[state.level]](photo, number)}
-      </div>`).join(``)}
-    </form>
-  </section>
-  ${templateStats(gameData)}`;
-
-const element = render(gameTemplate(gameState));
-const radioButtons = element.querySelectorAll(`input[type=radio]`);
-const optionAnswers = element.querySelectorAll(`.game__option`);
+// const element = render(gameTemplate(gameState));
+// const radioButtons = element.querySelectorAll(`input[type=radio]`);
+// const optionAnswers = element.querySelectorAll(`.game__option`);
 
 const checkRadioAnswers = (options) => {
   const answers = new Set();
@@ -92,6 +80,6 @@ const changeLevel = (state) => {
   }
 };
 
-checkAnswer(gameState);
+// checkAnswer(gameState);
 
 export default element;

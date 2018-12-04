@@ -1,4 +1,4 @@
-const MAX_LIVES = 3;
+import {MAX_LIVES} from './../data/constants';
 
 const template = (state) =>
   `<div class="game__lives">

@@ -1,9 +1,12 @@
 export const NUMBER_QUESTIONS = 10;
+export const MAX_LIVES = 3;
 
 export const InitialGame = Object.freeze({
   level: 0,
-  lives: 3,
-  time: 30
+  lives: MAX_LIVES,
+  time: 30,
+  answers: [],
+  stats: []
 });
 
 export const PointsAnwser = {
@@ -11,6 +14,12 @@ export const PointsAnwser = {
   QUICK: 150,
   SLOW: 50,
   BONUS: 50
+};
+
+export const Types = {
+  oneImage: 0,
+  twoImages: 1,
+  threeImage: 2
 };
 
 export const ResultType = {

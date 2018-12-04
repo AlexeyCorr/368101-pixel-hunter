@@ -1,11 +1,9 @@
 import {render, showScreen} from './../util';
-import game from './game';
-import {newGame} from './game';
-import {templateButtonBack} from './../components/index';
+import {newtGame} from './game';
+import {templateButtonBack} from './../template/index';
 
 const template =
   `<header class="header">
-    ${templateButtonBack()}
   </header>
   <section class="rules">
     <h2 class="rules__title">Правила</h2>
@@ -26,11 +24,13 @@ const template =
 
 const element = render(template);
 
+element.querySelector(`.header`).appendChild(templateButtonBack);
+
 const buttonContinue = element.querySelector(`.rules__button`);
 buttonContinue.addEventListener(`click`, (evt) => {
   evt.preventDefault();
-  newGame();
-  showScreen(game);
+
+  showScreen(newtGame());
 });
 
 const nameField = element.querySelector(`.rules__input`);
