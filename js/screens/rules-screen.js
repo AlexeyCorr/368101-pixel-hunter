@@ -1,5 +1,5 @@
 import {render, showScreen} from './../util';
-import {newtGame} from './game';
+import startGame from './game';
 import {templateButtonBack} from './../template/index';
 
 const template =
@@ -30,7 +30,8 @@ const buttonContinue = element.querySelector(`.rules__button`);
 buttonContinue.addEventListener(`click`, (evt) => {
   evt.preventDefault();
 
-  showScreen(newtGame());
+  startGame();
+  // showScreen(gameContainerElement);
 });
 
 const nameField = element.querySelector(`.rules__input`);

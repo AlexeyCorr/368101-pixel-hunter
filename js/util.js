@@ -1,11 +1,10 @@
 export const render = (template = ``) => {
   const wrapper = document.createElement(`div`);
-  wrapper.innerHTML = template.trim();;
+  wrapper.innerHTML = template.trim();
   return wrapper;
 };
 
 export const renderHeader = (...blocks) => {
-  console.log(blocks);
   const header = document.createElement(`header`);
   header.classList.add(`header`);
   blocks.forEach((block) => header.appendChild(block));

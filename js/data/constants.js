@@ -19,7 +19,7 @@ export const PointsAnwser = {
 export const Types = {
   oneImage: 0,
   twoImages: 1,
-  threeImage: 2
+  threeImages: 2
 };
 
 export const ResultType = {
