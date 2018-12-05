@@ -1,9 +1,7 @@
 import {MAX_LIVES} from './../data/constants';
-import templateButtonBack from './template-button-back';
 
 const template = (state) =>
   `<header class="header">
-    ${templateButtonBack}
     <div class="game__timer">${state.time}</div>
     <div class="game__lives">
       ${new Array(MAX_LIVES - state.lives)

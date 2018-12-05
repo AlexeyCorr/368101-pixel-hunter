@@ -27,13 +27,13 @@ export default () => {
   const gameContainerElement = render();
   const headerElement = render();
   const levelElement = render();
-  headerElement.appendChild(templateButtonBack);
 
   gameContainerElement.appendChild(headerElement);
   gameContainerElement.appendChild(levelElement);
 
   const updateGame = (state) => {
     headerElement.innerHTML = templateHeader(state);
+    headerElement.querySelector(`header`).insertAdjacentElement(`afterbegin`, templateButtonBack);
     levelElement.innerHTML = templateGame(gameData[Types[gameTypes[state.level]]], state.stats);
   };
 
