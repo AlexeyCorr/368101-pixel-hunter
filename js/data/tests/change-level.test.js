@@ -1,4 +1,4 @@
-import {assert} from 'chai';
+import assert from 'assert';
 import {changeLevel} from './../change-level';
 
 const incorrectData = [-1, `string`, null, [], true, false, undefined, {}];

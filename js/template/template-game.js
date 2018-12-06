@@ -6,9 +6,9 @@ export default (data, stats = ``) => {
     <p class="game__task">${data.description}</p>
     <form class="game__content  ${data.viewClass}">
       ${data.options.map((it) =>
-        `<div class="game__option">
-        ${templateOption[data.type](it.src, it.index)}</div>`)
-        .join(``)}
+    `<div class="game__option">
+      ${templateOption[data.type](it.src, it.index)}</div>`)
+      .join(``)}
     </form>
     ${templateStats(stats)}
   </section>`;

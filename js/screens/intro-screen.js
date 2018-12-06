@@ -1,4 +1,4 @@
-import {render, showScreen, container} from './../util';
+import {render, showScreen} from './../util';
 import greetingScreen from './greeting-screen';
 
 const template =

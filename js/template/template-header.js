@@ -13,6 +13,4 @@ const template = (state) =>
     </div>
   </header>`;
 
-
-
 export default template;

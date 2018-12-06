@@ -1,4 +1,4 @@
-import {assert} from 'chai';
+import assert from 'assert';
 import {countTime} from './../count-time';
 
 const SECOND = 1000;

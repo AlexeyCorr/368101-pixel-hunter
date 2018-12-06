@@ -1,4 +1,4 @@
-import {render, showScreen} from './../util';
+import {render} from './../util';
 import startGame from './game';
 import {templateButtonBack} from './../template/index';
 
@@ -31,7 +31,6 @@ buttonContinue.addEventListener(`click`, (evt) => {
   evt.preventDefault();
 
   startGame();
-  // showScreen(gameContainerElement);
 });
 
 const nameField = element.querySelector(`.rules__input`);

@@ -4,13 +4,6 @@ export const render = (template = ``) => {
   return wrapper;
 };
 
-export const renderHeader = (...blocks) => {
-  const header = document.createElement(`header`);
-  header.classList.add(`header`);
-  blocks.forEach((block) => header.appendChild(block));
-  return header;
-};
-
 export const container = document.querySelector(`#main`);
 export const showScreen = (screen) => {
   container.innerHTML = ``;

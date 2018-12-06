@@ -1,4 +1,4 @@
-import {assert} from 'chai';
+import assert from 'assert';
 import {changeLives} from './../change-lives';
 
 const incorrectData = [-1, `string`, null, [], true, false, undefined, {}];

@@ -1,4 +1,4 @@
-import {assert} from 'chai';
+import assert from 'assert';
 import {sumPoints} from './../sum-points';
 import {PointsAnwser} from './../constants';
 
