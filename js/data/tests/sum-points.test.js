@@ -1,11 +1,13 @@
-import {assert} from 'chai';
+import assert from 'assert';
 import {sumPoints} from './../sum-points';
-import {Points} from './../constants';
+import {PointsAnwser} from './../constants';
 
 const games = (repeat, result) => new Array(repeat).fill(result);
-const points = ({lives = 0, normal = 0, quick = 0, slow = 0} = {}) => {
-  let sum = lives * Points.LIVES + normal * Points.NORMAL_ANSWER + quick * Points.QUICK_ANSWER + slow * Points.SLOW_ANSWER;
-  return sum;
+const calcPointsAnwser = ({lives = 0, normal = 0, quick = 0, slow = 0} = {}) => {
+  return lives * PointsAnwser.BONUS +
+         normal * PointsAnwser.CORRECT +
+         quick * PointsAnwser.QUICK +
+         slow * PointsAnwser.SLOW;
 };
 
 describe(`sumPoints`, () => {
@@ -25,13 +27,13 @@ describe(`sumPoints`, () => {
     {
       lives: 3,
       answers: [...games(10, {isCorrect: true, time: 15})],
-      expected: points({lives: 3, normal: 10}),
+      expected: calcPointsAnwser({lives: 3, normal: 10}),
       message: `the speed of answers is normal and lives is full`
     },
     {
       lives: 2,
       answers: [...games(10, {isCorrect: true, time: 9})],
-      expected: points({lives: 2, quick: 10}),
+      expected: calcPointsAnwser({lives: 2, quick: 10}),
       message: `QUICK answers`
     },
     {
@@ -40,7 +42,7 @@ describe(`sumPoints`, () => {
         ...games(3, {isCorrect: true, time: 1}),
         ...games(7, {isCorrect: true, time: 4})
       ],
-      expected: points({lives: 1, quick: 10}),
+      expected: calcPointsAnwser({lives: 1, quick: 10}),
       message: `QUICK answers`
     }
   ];

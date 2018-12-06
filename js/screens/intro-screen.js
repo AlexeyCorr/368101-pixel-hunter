@@ -1,5 +1,5 @@
 import {render, showScreen} from './../util';
-import {greetingScreen} from './index';
+import greetingScreen from './greeting-screen';
 
 const template =
   `<section class="intro">

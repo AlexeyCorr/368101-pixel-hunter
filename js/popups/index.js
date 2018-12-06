@@ -1,7 +1,7 @@
-import confirmPopup from './confirm-popup';
+import openConfirmPopup from './confirm-popup';
 import errorPopup from './error-popup';
 
 export {
-  confirmPopup,
+  openConfirmPopup,
   errorPopup
 };

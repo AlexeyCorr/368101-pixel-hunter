@@ -1,7 +1,10 @@
-import {InitialGame, Points} from './constants';
+import {
+  NUMBER_QUESTIONS,
+  PointsAnwser
+} from './constants';
 
 export const sumPoints = (answers, lives) => {
-  if (answers.length < InitialGame.QUESTIONS || lives < 1) {
+  if (answers.length < NUMBER_QUESTIONS || lives < 1) {
     return -1;
   }
 
@@ -9,14 +12,14 @@ export const sumPoints = (answers, lives) => {
     .filter(({isCorrect}) => isCorrect)
     .reduce((points, {time}) => {
       if (time < 10) {
-        points += Points.QUICK_ANSWER;
+        points += PointsAnwser.QUICK;
         return points;
       }
       if (time > 20) {
-        points += Points.SLOW_ANSWER;
+        points += PointsAnwser.SLOW;
         return points;
       }
-      points += Points.NORMAL_ANSWER;
+      points += PointsAnwser.CORRECT;
       return points;
-    }, lives * Points.LIVES);
+    }, lives * PointsAnwser.BONUS);
 };

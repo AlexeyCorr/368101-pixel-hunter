@@ -1,6 +1,6 @@
-import {render, showScreen} from './../util';
-import {gameOneScreen} from './index';
-import {addReturnButton} from './../components/index';
+import {render} from './../util';
+import startGame from './game';
+import {templateButtonBack} from './../template/index';
 
 const template =
   `<header class="header">
@@ -24,12 +24,13 @@ const template =
 
 const element = render(template);
 
-addReturnButton(element.querySelector(`.header`));
+element.querySelector(`.header`).appendChild(templateButtonBack);
 
 const buttonContinue = element.querySelector(`.rules__button`);
 buttonContinue.addEventListener(`click`, (evt) => {
   evt.preventDefault();
-  showScreen(gameOneScreen);
+
+  startGame();
 });
 
 const nameField = element.querySelector(`.rules__input`);
