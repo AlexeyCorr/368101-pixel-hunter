@@ -1,41 +1,47 @@
-import {render} from './../util';
-import startGame from './game';
-import {templateButtonBack} from './../template/index';
+import AbstractView from '../abstract-view';
+import Application from './../application';
 
-const template =
-  `<header class="header">
-  </header>
-  <section class="rules">
-    <h2 class="rules__title">Правила</h2>
-    <ul class="rules__description">
-      <li>Угадай 10 раз для каждого изображения фото
-        <img class="rules__icon" src="img/icon-photo.png" width="32" height="31" alt="Фото"> или рисунок
-        <img class="rules__icon" src="img/icon-paint.png" width="32" height="31" alt="Рисунок"></li>
-      <li>Фотографиями или рисунками могут быть оба изображения.</li>
-      <li>На каждую попытку отводится 30 секунд.</li>
-      <li>Ошибиться можно не более 3 раз.</li>
-    </ul>
-    <p class="rules__ready">Готовы?</p>
-    <form class="rules__form">
-      <input class="rules__input" type="text" placeholder="Ваше Имя">
-      <button class="rules__button  continue" type="submit" disabled>Go!</button>
-    </form>
-  </section>`;
+class RulesScreen extends AbstractView {
+  constructor() {
+    super();
+  }
 
-const element = render(template);
+  get template() {
+    return `
+      <header class="header">
+      </header>
+      <section class="rules">
+        <h2 class="rules__title">Правила</h2>
+        <ul class="rules__description">
+          <li>Угадай 10 раз для каждого изображения фото
+            <img class="rules__icon" src="img/icon-photo.png" width="32" height="31" alt="Фото"> или рисунок
+            <img class="rules__icon" src="img/icon-paint.png" width="32" height="31" alt="Рисунок"></li>
+          <li>Фотографиями или рисунками могут быть оба изображения.</li>
+          <li>На каждую попытку отводится 30 секунд.</li>
+          <li>Ошибиться можно не более 3 раз.</li>
+        </ul>
+        <p class="rules__ready">Готовы?</p>
+        <form class="rules__form">
+          <input class="rules__input" type="text" placeholder="Ваше Имя">
+          <button class="rules__button  continue" type="submit" disabled>Go!</button>
+        </form>
+      </section>`;
+  }
 
-element.querySelector(`.header`).appendChild(templateButtonBack);
+  bind() {
+    const continueButton = this.element.querySelector(`.rules__button`);
+    const nameField = this.element.querySelector(`.rules__input`);
 
-const buttonContinue = element.querySelector(`.rules__button`);
-buttonContinue.addEventListener(`click`, (evt) => {
-  evt.preventDefault();
+    nameField.addEventListener(`input`, () => {
+      continueButton.disabled = nameField.value.length > 0 ? false : true;
+    });
 
-  startGame();
-});
+    continueButton.addEventListener(`click`, (evt) => {
+      evt.preventDefault();
 
-const nameField = element.querySelector(`.rules__input`);
-nameField.addEventListener(`input`, () => {
-  buttonContinue.disabled = nameField.value.length > 0 ? false : true;
-});
+      Application.showStats();
+    });
+  }
+}
 
-export default element;
+export default RulesScreen;

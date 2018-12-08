@@ -1,12 +1,14 @@
 import assert from 'assert';
-import {sumPoints} from './../sum-points';
-import {PointsAnwser} from './../constants';
+import {
+  sumPoints,
+  PointsAnwser
+} from './../game';
 
 const games = (repeat, result) => new Array(repeat).fill(result);
-const calcPointsAnwser = ({lives = 0, normal = 0, quick = 0, slow = 0} = {}) => {
+const calcPointsAnwser = ({lives = 0, normal = 0, fast = 0, slow = 0} = {}) => {
   return lives * PointsAnwser.BONUS +
          normal * PointsAnwser.CORRECT +
-         quick * PointsAnwser.QUICK +
+         fast * PointsAnwser.FAST +
          slow * PointsAnwser.SLOW;
 };
 
@@ -33,7 +35,7 @@ describe(`sumPoints`, () => {
     {
       lives: 2,
       answers: [...games(10, {isCorrect: true, time: 9})],
-      expected: calcPointsAnwser({lives: 2, quick: 10}),
+      expected: calcPointsAnwser({lives: 2, fast: 10}),
       message: `QUICK answers`
     },
     {
@@ -42,7 +44,7 @@ describe(`sumPoints`, () => {
         ...games(3, {isCorrect: true, time: 1}),
         ...games(7, {isCorrect: true, time: 4})
       ],
-      expected: calcPointsAnwser({lives: 1, quick: 10}),
+      expected: calcPointsAnwser({lives: 1, fast: 10}),
       message: `QUICK answers`
     }
   ];

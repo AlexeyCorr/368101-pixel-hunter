@@ -1,4 +1,4 @@
-import {NUMBER_QUESTIONS} from './constants';
+import {NUMBER_QUESTIONS} from './game';
 
 const pictures = {
   paintings: [
@@ -20,11 +20,10 @@ const getRandomArr = (arr, num) => {
   .slice(num);
 };
 
-export const gameData = [
-  {
+export const gameData = {
+  oneImage: {
     type: `oneImage`,
     description: `Угадай, фото или рисунок?`,
-    viewClass: `game__content--wide`,
     imageSum: 1,
     options: [
       {
@@ -34,7 +33,7 @@ export const gameData = [
       }
     ],
   },
-  {
+  twoImages: {
     type: `twoImages`,
     description: `Угадайте для каждого изображения фото или рисунок?`,
     viewClass: ``,
@@ -52,7 +51,7 @@ export const gameData = [
       }
     ]
   },
-  {
+  threeImages: {
     type: `threeImages`,
     description: `Найдите рисунок среди изображений`,
     viewClass: `game__content--triple`,
@@ -75,7 +74,7 @@ export const gameData = [
       }
     ]
   }
-];
+};
 
 const getTypes = () => gameData.map((it) => it.type);
 
