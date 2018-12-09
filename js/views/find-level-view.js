@@ -1,6 +1,6 @@
 import AbstractView from '../abstract-view';
 
-class OneGameView extends AbstractView {
+class FindLevelView extends AbstractView {
   constructor(level) {
     super();
     this.level = level;
@@ -11,15 +11,9 @@ class OneGameView extends AbstractView {
       <section class="game">
       <p class="game__task">${this.level.question}</p>
       <form class="game__content game__content--triple">
-        <div class="game__option">
-          <img src="${this.level.answers[0].image.src || `http://placehold.it/304x455`}" alt="Option 1" width="304" height="455">
-        </div>
-        <div class="game__option">
-          <img src="${this.level.answers[1].image.src || `http://placehold.it/304x455`}" alt="Option 2" width="304" height="455">
-        </div>
-        <div class="game__option">
-          <img src="${this.level.answers[2].image.src || `http://placehold.it/304x455`}" alt="Option 3" width="304" height="455">
-        </div>
+        ${[...this.level.answers].map((it, index) =>`<div class="game__option">
+        <img src="${it.image.src || `http://placehold.it/304x455`}" alt="Option ${index}" width="304" height="455">
+        </div>`).join(``)}
       </form>
     </section>`;
   }
@@ -28,7 +22,17 @@ class OneGameView extends AbstractView {
 
   }
 
+  onImageLoad() {
+  }
+
   bind() {
+    const images = this.element.querySelectorAll(`.game__option > img`);
+    images.forEach((image) => {
+      image.addEventListener(`load`, () => {
+        this.onImageLoad(image);
+      });
+    });
+
     const answerButton = this.element.querySelectorAll(`.game__option`);
     answerButton.forEach((it) => {
       it.addEventListener(`click`, (evt) => {
@@ -40,4 +44,4 @@ class OneGameView extends AbstractView {
   }
 }
 
-export default OneGameView;
+export default FindLevelView;

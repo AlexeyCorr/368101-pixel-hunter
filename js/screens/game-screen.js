@@ -1,28 +1,14 @@
 import HeaderView from './../views/header-view';
-import OneGameView from './../views/one-game-view';
-import TwoGameView from './../views/two-game-view';
-import ThreeGameView from './../views/three-game-view';
+import ChoiceLevelView from './../views/choice-level-view';
+import FindLevelView from './../views/find-level-view';
 import StatsView from './../views/stats-view';
 import Application from './../application';
-import StatsScreen from './stats-screen';
 
 class GameScreen {
   constructor(model) {
     this.model = model;
     this.header = new HeaderView(this.model.state);
-    switch (this.model.getCurrentLevel().type) {
-      case `oneImage`:
-        this.gameContent = new OneGameView(this.model.getCurrentLevel());
-        break;
-      case `twoImages`:
-        this.gameContent = new TwoGameView(this.model.getCurrentLevel());
-        break;
-      case `threeImages`:
-        this.gameContent = new ThreeGameView(this.model.getCurrentLevel());
-        break;
-      default:
-        throw new Error(`Unknown type: ${this.model.getCurrentLevel().type}`);
-    }
+    this.gameContent = this.getGameView(this.model.getCurrentLevel());
     this.stats = new StatsView(this.model.state);
 
     this.root = document.createElement(`div`);
@@ -37,25 +23,58 @@ class GameScreen {
     return this.root;
   }
 
+  answer() {
+    if (this.model.hasNextLevel() && !this.model.isDead()) {
+      this.stopGame();
+      this.model.nextLevel();
+      this.startGame();
+      this.changeLevel();
+    } else {
+      this.endGame();
+    }
+  }
+
+  imageResize(image) {
+    const frame = {
+      width: image.parentNode.clientWidth,
+      height: image.parentNode.clientHeight
+    };
+    const given = {
+      width: image.naturalWidth,
+      height: image.naturalHeight
+    };
+    const optimizedSize = this.model.imageResize(frame, given);
+
+    image.width = optimizedSize.width;
+    image.height = optimizedSize.height;
+  }
+
+  getGameView(level) {
+    const type = level.type;
+
+    const gameView = {
+      oneImage: new ChoiceLevelView(level),
+      twoImages: new ChoiceLevelView(level),
+      threeImages: new FindLevelView(level)
+    };
+
+    const view = gameView[type];
+
+    view.onAnswer = this.answer.bind(this);
+    view.onImageLoad = this.imageResize.bind(this);
+
+    return view;
+  }
+
   stopGame() {
     clearInterval(this._interval);
   }
 
   startGame() {
-    this.changeLevel();
-
     this._interval = setInterval(() => {
       this.model.tick();
       this.updateHeader();
     }, 1000);
-  }
-
-  answer() {
-
-  }
-
-  exit() {
-    Application.showStats();
   }
 
   updateHeader() {
@@ -64,31 +83,13 @@ class GameScreen {
     this.header = header;
   }
 
-  levelView(level) {
-    switch (level.type) {
-      case `oneImage`:
-        return new OneGameView(level);
-      case `twoImages`:
-        return new TwoGameView(level);
-      case `threeImages`:
-        return new ThreeGameView(level);
-      default:
-        throw new Error(`Unknown type: ${level.type}`);
-    }
-  }
-
   changeLevel() {
     this.updateHeader();
-    const level = this.levelView(this.model.getCurrentLevel());
-    level.onAnswer = this.answer();
+    const level = this.getGameView(this.model.getCurrentLevel());
     this.changeContentView(level);
   }
 
   endGame() {
-    const stats = new StatsScreen();
-    stats.onRestart = this.restart.bind(this);
-    stats.onExit = this.exit.bind(this);
-
     Application.showStats();
   }
 

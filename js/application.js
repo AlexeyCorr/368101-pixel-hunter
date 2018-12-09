@@ -1,7 +1,7 @@
 import IntroScreen from './screens/intro-screen';
 import WelcomeScreen from './screens/welcome-screen';
 import RulesScreen from './screens/rules-screen';
-import StatsScreen from './screens/stats-screen';
+import ResulrScreen from './screens/result-screen';
 import ConfirmPopupScreen from './screens/comfirm-popup-screen';
 import GameModel from './data/game-model';
 import GameScreen from './screens/game-screen';
@@ -39,7 +39,7 @@ class Application {
   }
 
   static showStats() {
-    const statistics = new StatsScreen();
+    const statistics = new ResulrScreen();
     changeView(statistics.element);
   }
 

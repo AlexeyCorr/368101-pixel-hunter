@@ -17,6 +17,7 @@ const gameData = [
   {
     type: `oneImage`,
     question: `Угадай, фото или рисунок?`,
+    className: `game__content--wide`,
     answers: [
       {
         image: {
@@ -24,13 +25,14 @@ const gameData = [
           width: 705,
           height: 455
         },
-        type: `photo`,
+        type: `photo`
       }
     ]
   },
   {
     type: `twoImages`,
     question: `Угадайте для каждого изображения фото или рисунок?`,
+    className: ``,
     answers: [
       {
         image: {
@@ -38,7 +40,7 @@ const gameData = [
           width: 468,
           height: 468
         },
-        type: `photo`,
+        type: `photo`
       },
       {
         image: {
@@ -46,7 +48,7 @@ const gameData = [
           width: 468,
           height: 468
         },
-        type: `paint`,
+        type: `paint`
       }
     ]
   },
@@ -60,7 +62,7 @@ const gameData = [
           width: 304,
           height: 455
         },
-        type: `photo`,
+        type: `photo`
       },
       {
         image: {
@@ -68,7 +70,7 @@ const gameData = [
           width: 304,
           height: 455
         },
-        type: `paint`,
+        type: `paint`
       },
       {
         image: {
@@ -76,7 +78,7 @@ const gameData = [
           width: 304,
           height: 455
         },
-        type: `photo`,
+        type: `photo`
       },
     ]
   }
