@@ -1,15 +1,13 @@
 import AbstractView from '../abstract-view';
 import Application from './../application';
 
-class RulesScreen extends AbstractView {
+class RulesView extends AbstractView {
   constructor() {
     super();
   }
 
   get template() {
     return `
-      <header class="header">
-      </header>
       <section class="rules">
         <h2 class="rules__title">Правила</h2>
         <ul class="rules__description">
@@ -38,10 +36,9 @@ class RulesScreen extends AbstractView {
 
     continueButton.addEventListener(`click`, (evt) => {
       evt.preventDefault();
-
-      Application.showStats();
+      Application.showGame(nameField.value);
     });
   }
 }
 
-export default RulesScreen;
+export default RulesView;

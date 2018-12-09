@@ -3,6 +3,8 @@ import WelcomeScreen from './screens/welcome-screen';
 import RulesScreen from './screens/rules-screen';
 import StatsScreen from './screens/stats-screen';
 import ConfirmPopupScreen from './screens/comfirm-popup-screen';
+import GameModel from './data/game-model';
+import GameScreen from './screens/game-screen';
 
 const confirmPopup = new ConfirmPopupScreen();
 const main = document.querySelector(`main`);
@@ -30,11 +32,11 @@ class Application {
     changeView(rules.element);
   }
 
-  // static showGame(playerName) {
-  //   const gameScreen = new GameScreen(new QuestModel(playerName));
-  //   changeView(gameScreen.element);
-  //   gameScreen.startGame();
-  // }
+  static showGame(playerName) {
+    const gameScreen = new GameScreen(new GameModel(playerName));
+    changeView(gameScreen.element);
+    gameScreen.startGame();
+  }
 
   static showStats() {
     const statistics = new StatsScreen();

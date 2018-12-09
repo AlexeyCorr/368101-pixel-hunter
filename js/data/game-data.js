@@ -13,75 +13,81 @@ const pictures = {
   ]
 };
 
-const getRandomArr = (arr, num) => {
-  return arr.map((a) => ({sort: Math.random(), value: a}))
-  .sort((a, b) => a.sort - b.sort)
-  .map((a) => a.value)
-  .slice(num);
-};
-
-export const gameData = {
-  oneImage: {
+const gameData = [
+  {
     type: `oneImage`,
-    description: `Угадай, фото или рисунок?`,
-    imageSum: 1,
-    options: [
+    question: `Угадай, фото или рисунок?`,
+    answers: [
       {
-        index: 1,
-        imageType: `photo`,
-        src: getRandomArr(pictures.photos, -1).join(``)
+        image: {
+          src: pictures.photos[0],
+          width: 705,
+          height: 455
+        },
+        type: `photo`,
       }
-    ],
+    ]
   },
-  twoImages: {
+  {
     type: `twoImages`,
-    description: `Угадайте для каждого изображения фото или рисунок?`,
-    viewClass: ``,
-    imageSum: 2,
-    options: [
+    question: `Угадайте для каждого изображения фото или рисунок?`,
+    answers: [
       {
-        index: 1,
-        imageType: `photo`,
-        src: getRandomArr(pictures.photos, -1).join(``)
+        image: {
+          src: pictures.photos[1],
+          width: 468,
+          height: 468
+        },
+        type: `photo`,
       },
       {
-        index: 2,
-        imageType: `paint`,
-        src: getRandomArr(pictures.paintings, -1).join(``)
+        image: {
+          src: pictures.paintings[0],
+          width: 468,
+          height: 468
+        },
+        type: `paint`,
       }
     ]
   },
-  threeImages: {
+  {
     type: `threeImages`,
-    description: `Найдите рисунок среди изображений`,
-    viewClass: `game__content--triple`,
-    imageSum: 3,
-    options: [
+    question: `Найдите рисунок среди изображений`,
+    answers: [
       {
-        index: 1,
-        imageType: `photo`,
-        src: getRandomArr(pictures.photos, -1).join(``)
+        image: {
+          src: pictures.photos[2],
+          width: 304,
+          height: 455
+        },
+        type: `photo`,
       },
       {
-        index: 2,
-        imageType: `paint`,
-        src: getRandomArr(pictures.paintings, -1).join(``)
+        image: {
+          src: pictures.paintings[1],
+          width: 304,
+          height: 455
+        },
+        type: `paint`,
       },
       {
-        index: 3,
-        imageType: `photo`,
-        src: getRandomArr(pictures.photos, -1).join(``)
-      }
+        image: {
+          src: pictures.photos[2],
+          width: 304,
+          height: 455
+        },
+        type: `photo`,
+      },
     ]
   }
-};
+];
 
-const getTypes = () => gameData.map((it) => it.type);
-
-export const getGameTypes = () => {
-  const types = [];
+const getGameData = () => {
+  const data = [];
   for (let i = 0; i < NUMBER_QUESTIONS; i++) {
-    types.push(getRandomArr(getTypes(), -1).join(``));
+    data.push(gameData[Math.floor(Math.random() * gameData.length)]);
   }
-  return types;
+  return data;
 };
+
+export const GAME = getGameData();
