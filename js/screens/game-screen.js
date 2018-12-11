@@ -3,6 +3,7 @@ import ChoiceLevelView from './../views/choice-level-view';
 import FindLevelView from './../views/find-level-view';
 import StatsView from './../views/stats-view';
 import Application from './../application';
+import {InitialGame} from './../data/game';
 
 class GameScreen {
   constructor(model) {
@@ -27,7 +28,7 @@ class GameScreen {
     this.stopGame();
     const result = {
       isCorrect: answer,
-      time: this.model.state.time
+      time: InitialGame.time - this.model.state.time
     };
     if (!result.isCorrect) {
       this.model.die();
@@ -111,7 +112,7 @@ class GameScreen {
   }
 
   endGame() {
-    Application.showStats();
+    Application.showResult(this.model);
   }
 
   changeContentView(view) {

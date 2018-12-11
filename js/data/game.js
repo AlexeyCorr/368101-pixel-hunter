@@ -26,7 +26,7 @@ export const ResultType = {
 
 export const sumPoints = (answers, lives) => {
   if (answers.length < NUMBER_QUESTIONS || lives < 1) {
-    return -1;
+    return `fail`;
   }
 
   return answers

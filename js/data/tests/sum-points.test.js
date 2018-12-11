@@ -17,13 +17,13 @@ describe(`sumPoints`, () => {
     {
       lives: 2,
       answers: [...games(9, {isCorrect: true, time: 2})],
-      expected: -1,
+      expected: `fail`,
       message: `the answers less than 10`
     },
     {
       lives: 0,
       answers: [...games(10, {isCorrect: true, time: 19})],
-      expected: -1,
+      expected: `fail`,
       message: `the lives less than 1`
     },
     {
