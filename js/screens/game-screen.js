@@ -8,7 +8,7 @@ import {InitialGame} from './../data/game';
 class GameScreen {
   constructor(model) {
     this.model = model;
-    this.header = new HeaderView(this.model.state);
+    this.header = new HeaderView(true, this.model.state);
     this.gameContent = this.getGameView(this.model.getCurrentLevel());
     this.stats = new StatsView(this.model.state);
 
@@ -94,7 +94,7 @@ class GameScreen {
   }
 
   updateHeader() {
-    const header = new HeaderView(this.model.state);
+    const header = new HeaderView(true, this.model.state);
     this.root.replaceChild(header.element, this.header.element);
     this.header = header;
   }

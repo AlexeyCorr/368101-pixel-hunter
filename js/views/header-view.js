@@ -3,10 +3,10 @@ import Application from './../application';
 import {MAX_LIVES} from './../data/game';
 
 class HeaderView extends AbstractView {
-  constructor(state) {
+  constructor(isGame, state = ``) {
     super();
     this.state = state;
-    // this.isGame = isGame;
+    this.isGame = isGame;
   }
 
   get template() {
@@ -21,15 +21,15 @@ class HeaderView extends AbstractView {
             <use xlink:href="img/sprite.svg#logo-small"></use>
           </svg>
         </button>
-          <div class="game__timer">${this.state.time}</div>
-          <div class="game__lives">
-          ${new Array(MAX_LIVES - this.state.lives)
-            .fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Missed Life" width="31" height="27">`)
-            .join(``)}
-          ${new Array(this.state.lives)
-            .fill(`<img src="img/heart__full.svg" class="game__heart" alt="Life" width="31" height="27">`)
-            .join(``)}
-        </div>
+        ${this.isGame ? `<div class="game__timer">${this.state.time}</div>
+        <div class="game__lives">
+        ${new Array(MAX_LIVES - this.state.lives)
+          .fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Missed Life" width="31" height="27">`)
+          .join(``)}
+        ${new Array(this.state.lives)
+          .fill(`<img src="img/heart__full.svg" class="game__heart" alt="Life" width="31" height="27">`)
+          .join(``)}
+        </div>` : ``}
       </header>`;
   }
 
