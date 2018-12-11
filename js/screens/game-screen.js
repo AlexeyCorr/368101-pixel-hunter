@@ -23,15 +23,27 @@ class GameScreen {
     return this.root;
   }
 
-  answer() {
+  onAnswer(answer) {
+    this.stopGame();
+    const result = {
+      isCorrect: answer,
+      time: this.model.state.time
+    };
+    if (!result.isCorrect) {
+      this.model.die();
+    }
+    let stat = this.model.getStats(result);
+    this.model.state.stats.push(stat);
+    this.model.state.answers.push(result);
+    this.updateStats();
     if (this.model.hasNextLevel() && !this.model.isDead()) {
-      this.stopGame();
       this.model.nextLevel();
       this.startGame();
       this.changeLevel();
     } else {
       this.endGame();
     }
+    this.model.state.time = 30;
   }
 
   imageResize(image) {
@@ -60,7 +72,7 @@ class GameScreen {
 
     const view = gameView[type];
 
-    view.onAnswer = this.answer.bind(this);
+    view.onAnswer = this.onAnswer.bind(this);
     view.onImageLoad = this.imageResize.bind(this);
 
     return view;
@@ -73,6 +85,9 @@ class GameScreen {
   startGame() {
     this._interval = setInterval(() => {
       this.model.tick();
+      if (this.model.state.time === 0) {
+        this.onAnswer(false);
+      }
       this.updateHeader();
     }, 1000);
   }
@@ -81,6 +96,12 @@ class GameScreen {
     const header = new HeaderView(this.model.state);
     this.root.replaceChild(header.element, this.header.element);
     this.header = header;
+  }
+
+  updateStats() {
+    const stats = new StatsView(this.model.state);
+    this.root.replaceChild(stats.element, this.stats.element);
+    this.stats = stats;
   }
 
   changeLevel() {
@@ -97,7 +118,6 @@ class GameScreen {
     this.root.replaceChild(view.element, this.gameContent.element);
     this.gameContent = view;
   }
-
 }
 
 export default GameScreen;

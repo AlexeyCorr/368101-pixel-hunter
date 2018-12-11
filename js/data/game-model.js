@@ -3,7 +3,7 @@ import {
   die, tick,
   changeLevel,
   NUMBER_QUESTIONS,
-  resize
+  resize, ResultType
 } from './game';
 import {GAME} from './game-data';
 
@@ -53,6 +53,22 @@ class GameModel {
 
   tick() {
     this._state = tick(this._state);
+  }
+
+  getStats(state) {
+    let time = InitialGame.time - state.time;
+    if (state.isCorrect) {
+      if (time < 10) {
+        return ResultType.FAST;
+      } else if (time > 20) {
+        return ResultType.SLOW;
+      } else if (time >= 10 && time <= 20) {
+        return ResultType.CORRECT;
+      }
+    } else {
+      return ResultType.WRONG;
+    }
+    return ResultType.UNKNOWN;
   }
 }
 

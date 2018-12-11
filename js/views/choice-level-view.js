@@ -11,7 +11,7 @@ class ChoiceLevelView extends AbstractView {
       <section class="game">
       <p class="game__task">${this.level.question}</p>
       <form class="game__content ${this.level.className}">
-        ${[...this.level.answers].map((it, index) => `<div class="game__option">
+        ${[...this.level.answers].map((it, index) => `<div class="game__option" data-type="${it.type}">
           <img src="${it.image.src || `http://placehold.it/468x458`}" alt="Option ${index}" width="${it.image.width}" height="${it.image.height}">
           <label class="game__answer game__answer--photo">
             <input class="visually-hidden" name="question${index}" type="radio" value="photo">
@@ -40,17 +40,28 @@ class ChoiceLevelView extends AbstractView {
         this.onImageLoad(image);
       });
     });
-    const answerButton = this.element.querySelectorAll(`input[type=radio]`);
-    const answers = new Set();
-    answerButton.forEach((it) => {
-      it.addEventListener(`change`, () => {
-        if (it.checked) {
-          answers.add(it.name);
-          if ([...answers].length === (answerButton.length / 2)) {
-            this.onAnswer();
+
+    const form = this.element.querySelector(`.game__content`);
+    const options = form.querySelectorAll(`.game__option`);
+
+    form.addEventListener(`change`, () => {
+      const answers = [];
+
+      options.forEach((option) => {
+        let type = option.dataset.type;
+        let answerButtons = option.querySelectorAll(`input[type=radio]`);
+
+        answerButtons.forEach((it) => {
+          if (it.checked) {
+            let value = it.value;
+            answers.push(type === value);
           }
-        }
+        });
       });
+      if (answers.length === options.length) {
+        const answer = !answers.includes(false);
+        this.onAnswer(answer);
+      }
     });
   }
 }

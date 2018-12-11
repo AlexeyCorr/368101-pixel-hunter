@@ -16,17 +16,12 @@ export const PointsAnwser = {
   BONUS: 50
 };
 
-export const Types = {
-  oneImage: 0,
-  twoImages: 1,
-  threeImages: 2
-};
-
 export const ResultType = {
   CORRECT: `correct`,
   FAST: `fast`,
   SLOW: `slow`,
-  WRONG: `wrong`
+  WRONG: `wrong`,
+  UNKNOWN: `unknown`
 };
 
 export const sumPoints = (answers, lives) => {
