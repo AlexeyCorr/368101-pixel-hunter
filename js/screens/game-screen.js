@@ -1,4 +1,6 @@
-import HeaderView from './../views/header-view';
+import ButtonBackView from './../views/button-back-view';
+import TimerView from './../views/timer-view';
+import LivesView from './../views/lives-view';
 import ChoiceLevelView from './../views/choice-level-view';
 import FindLevelView from './../views/find-level-view';
 import StatsView from './../views/stats-view';
@@ -8,12 +10,19 @@ import {InitialGame} from './../data/game';
 class GameScreen {
   constructor(model) {
     this.model = model;
-    this.header = new HeaderView(true, this.model.state);
+    this.buttonBack = new ButtonBackView();
+    this.timer = new TimerView(this.model.state);
+    this.lives = new LivesView(this.model.state);
     this.gameContent = this.getGameView(this.model.getCurrentLevel());
     this.stats = new StatsView(this.model.state);
 
+    this.header = document.createElement(`header`);
+    this.header.classList.add(`header`);
+    this.header.appendChild(this.buttonBack.element);
+    this.header.appendChild(this.timer.element);
+    this.header.appendChild(this.lives.element);
     this.root = document.createElement(`div`);
-    this.root.appendChild(this.header.element);
+    this.root.appendChild(this.header);
     this.root.appendChild(this.gameContent.element);
     this.root.appendChild(this.stats.element);
 
@@ -89,14 +98,20 @@ class GameScreen {
       if (this.model.state.time === 0) {
         this.onAnswer(false);
       }
-      this.updateHeader();
+      this.updateTimer();
     }, 1000);
   }
 
-  updateHeader() {
-    const header = new HeaderView(true, this.model.state);
-    this.root.replaceChild(header.element, this.header.element);
-    this.header = header;
+  updateTimer() {
+    const timer = new TimerView(this.model.state);
+    this.header.replaceChild(timer.element, this.timer.element);
+    this.timer = timer;
+  }
+
+  updateLives() {
+    const lives = new LivesView(this.model.state);
+    this.header.replaceChild(lives.element, this.lives.element);
+    this.lives = lives;
   }
 
   updateStats() {
@@ -106,7 +121,8 @@ class GameScreen {
   }
 
   changeLevel() {
-    this.updateHeader();
+    this.updateLives();
+    this.updateTimer();
     const level = this.getGameView(this.model.getCurrentLevel());
     this.changeContentView(level);
   }

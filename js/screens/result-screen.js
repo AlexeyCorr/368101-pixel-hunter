@@ -1,13 +1,16 @@
-import HeaderView from './../views/header-view';
+import ButtonBackView from './../views/button-back-view';
 import ResultView from './../views/result-view';
 
 class ResultScreen {
   constructor(model) {
-    this.header = new HeaderView(false);
+    this.buttonBack = new ButtonBackView();
     this.content = new ResultView(model);
 
+    this.header = document.createElement(`header`);
+    this.header.classList.add(`header`);
+    this.header.appendChild(this.buttonBack.element);
     this.element = document.createElement(`div`);
-    this.element.appendChild(this.header.element);
+    this.element.appendChild(this.header);
     this.element.appendChild(this.content.element);
   }
 
