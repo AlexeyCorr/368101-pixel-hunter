@@ -54,6 +54,10 @@ export const changeLevel = (game, level) => {
     throw new Error(`Level should not be negative value`);
   }
 
+  if (level > NUMBER_QUESTIONS) {
+    throw new Error(`Level can not be more than NUMBER_QUESTIONS`);
+  }
+
   return Object.assign({}, game, {
     level
   });

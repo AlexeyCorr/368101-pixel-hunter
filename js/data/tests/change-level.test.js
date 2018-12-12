@@ -1,23 +1,26 @@
-// import assert from 'assert';
-// import {changeLevel} from './../change-level';
+import assert from 'assert';
+import {
+  changeLevel,
+  InitialGame,
+  NUMBER_QUESTIONS
+} from './../game';
 
-// const incorrectData = [-1, `string`, null, [], true, false, undefined, {}];
+describe(`changeLevel`, () => {
+  it(`must update game level`, () => {
+    assert.equal(changeLevel(InitialGame, 2).level, 2);
+    assert.equal(changeLevel(InitialGame, 5).level, 5);
+    assert.equal(changeLevel(InitialGame, 9).level, 9);
+  });
 
-// describe(`changeLevel`, () => {
-//   it(`should update level of the game`, () => {
-//     const currentLevel = 5;
-//     assert.equal(changeLevel(currentLevel), currentLevel + 1);
-//   });
+  it(`level value must be number`, () => {
+    assert.throws(() => changeLevel(InitialGame, []).level, /Level should be of type number/);
+  });
 
-//   it(`should throw error when negative values`, () => {
-//     assert.throws(() => changeLevel(-1));
-//   });
+  it(`should throw an error if the level is negative`, () => {
+    assert.throws(() => changeLevel(InitialGame, -5).level, /Level should not be negative value/);
+  });
 
-//   for (const data of incorrectData) {
-//     it(`should throw error when given incorrect data ${data}`, () => {
-//       assert.throws(() => {
-//         changeLevel(data);
-//       });
-//     });
-//   }
-// });
+  it(`level should not be more than ${NUMBER_QUESTIONS}`, () => {
+    assert.throws(() => changeLevel(InitialGame, 99).level, /Level can not be more than NUMBER_QUESTIONS/);
+  });
+});
