@@ -1,19 +1,27 @@
-import {render, showScreen} from './../util';
-import greetingScreen from './greeting-screen';
+import AbstractView from '../abstract-view';
+import Application from './../application';
 
-const template =
-  `<section class="intro">
-    <button class="intro__asterisk asterisk" type="button"><span class="visually-hidden">Продолжить</span>*</button>
-    <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
-  </section>`;
+class IntroScreen extends AbstractView {
+  constructor() {
+    super();
+  }
 
-const element = render(template);
+  get template() {
+    return `
+      <section class="intro">
+      <button class="intro__asterisk asterisk" type="button"><span class="visually-hidden">Продолжить</span>*</button>
+      <p class="intro__motto"><sup>*</sup> Это не фото. Это рисунок маслом нидерландского художника-фотореалиста Tjalf Sparnaay.</p>
+    </section>`;
+  }
 
-const continueButton = element.querySelector(`.intro__asterisk`);
+  bind() {
+    const continueButton = this.element.querySelector(`.intro__asterisk`);
+    continueButton.addEventListener(`click`, (evt) => {
+      evt.preventDefault();
 
-continueButton.addEventListener(`click`, (evt) => {
-  evt.preventDefault();
-  showScreen(greetingScreen);
-});
+      Application.showWelcome();
+    });
+  }
+}
 
-export default element;
+export default IntroScreen;

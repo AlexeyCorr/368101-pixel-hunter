@@ -5,6 +5,16 @@
 @import "../variables/colors";
 @import "../mixins/text";
 
+@keyframes blink {
+  from {
+    color: #de1f1f;
+  }
+
+  to {
+    color: #00222d;
+  }
+}
+
 .game {
   display: flex;
   flex-direction: column;
@@ -16,6 +26,12 @@
   @include bold-text;
   font-size: 60px;
   line-height: 45px;
+}
+
+.game__timer--blink {
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
 }
 
 .game__lives {

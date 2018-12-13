@@ -1,6 +1,3 @@
-import {showScreen, container} from './util';
-import {introScreen, rulesScreen} from './screens/index';
-import {templateFooter} from './template/index'
+import Application from './application';
 
-showScreen(rulesScreen);
-container.insertAdjacentHTML(`afterend`, templateFooter);
+Application.showIntro();
