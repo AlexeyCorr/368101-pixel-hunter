@@ -9,6 +9,8 @@ class AbstractView {
     if (new.target === AbstractView) {
       throw new Error(`Can't instantiate AbstractView, only concrete one`);
     }
+
+    this._element = null;
   }
 
   get template() {
@@ -16,12 +18,12 @@ class AbstractView {
   }
 
   get element() {
-    if (this._element) {
-      return this._element;
-    }
+  if (this._element === null) {
     this._element = this.render();
     this.bind(this._element);
-    return this._element;
+  }
+
+  return this._element;
   }
 
   render() {

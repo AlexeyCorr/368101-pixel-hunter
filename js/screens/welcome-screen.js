@@ -2,9 +2,6 @@ import AbstractView from '../abstract-view';
 import Application from './../application';
 
 class WelcomScreen extends AbstractView {
-  constructor() {
-    super();
-  }
 
   get template() {
     return `
