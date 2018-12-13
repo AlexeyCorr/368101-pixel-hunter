@@ -1,9 +1,6 @@
 import AbstractView from '../abstract-view';
 
 class RulesView extends AbstractView {
-  constructor() {
-    super();
-  }
 
   get template() {
     return `
