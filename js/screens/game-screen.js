@@ -104,6 +104,9 @@ class GameScreen {
 
   updateTimer() {
     const timer = new TimerView(this.model.state);
+    if (this.model.state.time <= 5) {
+      timer.element.classList.add(`game__timer--blink`);
+    }
     this.header.replaceChild(timer.element, this.timer.element);
     this.timer = timer;
   }
