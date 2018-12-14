@@ -2,16 +2,13 @@ import {
   InitialGame,
   die, tick,
   changeLevel,
-  NUMBER_QUESTIONS,
   resize, ResultType,
   sumPoints
 } from './game';
-import {GAME} from './game-data';
-
-const getLevel = (state) => GAME[state.level];
 
 class GameModel {
-  constructor(playerName) {
+  constructor(data, playerName) {
+    this.data = data;
     this.playerName = playerName;
     this.restart();
   }
@@ -21,7 +18,7 @@ class GameModel {
   }
 
   hasNextLevel() {
-    return this._state.level + 1 !== NUMBER_QUESTIONS;
+    return this._state.level + 1 !== this.data.length;
   }
 
   imageResize(frame, given) {
@@ -44,12 +41,16 @@ class GameModel {
     return this._state.lives <= 0;
   }
 
+  getLevel(level) {
+    return this.data[level];
+  }
+
   getCurrentLevel() {
-    return getLevel(this._state);
+    return this.getLevel(this._state.level);
   }
 
   win() {
-    return this._state.level === NUMBER_QUESTIONS;
+    return this._state.level === this.data.length;
   }
 
   tick() {

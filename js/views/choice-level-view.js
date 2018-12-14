@@ -10,9 +10,9 @@ class ChoiceLevelView extends AbstractView {
     return `
       <section class="game">
       <p class="game__task">${this.level.question}</p>
-      <form class="game__content ${this.level.className}">
+      <form class="game__content ${this.level.type === `tinder-like` ? `game__content--wide` : ``}">
         ${[...this.level.answers].map((it, index) => `<div class="game__option" data-type="${it.type}">
-          <img src="${it.image.src || `http://placehold.it/468x458`}" alt="Option ${index}" width="${it.image.width}" height="${it.image.height}">
+          <img src="${it.image.url || `http://placehold.it/468x458`}" alt="Option ${index}" width="${it.image.width}" height="${it.image.height}">
           <label class="game__answer game__answer--photo">
             <input class="visually-hidden" name="question${index}" type="radio" value="photo">
             <span>Фото</span>

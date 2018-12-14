@@ -22,7 +22,7 @@ class RulesScreen {
   }
 
   gameStart(playerName) {
-    this.content.onClick = Application.showGame(playerName);
+    this.content.onClick = Application.startGame(playerName);
   }
 
 }
