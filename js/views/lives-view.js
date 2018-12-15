@@ -4,6 +4,7 @@ import {MAX_LIVES} from './../data/game';
 class LivesView extends AbstractView {
   constructor(state) {
     super();
+
     this.state = state;
   }
 

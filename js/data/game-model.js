@@ -2,7 +2,8 @@ import {
   InitialGame,
   die, tick,
   changeLevel,
-  resize, ResultType
+  resize, ResultType,
+  NUMBER_QUESTIONS
 } from './game';
 
 class GameModel {
@@ -17,7 +18,7 @@ class GameModel {
   }
 
   hasNextLevel() {
-    return this._state.level + 1 !== this.data.length;
+    return this._state.level + 1 !== NUMBER_QUESTIONS;
   }
 
   imageResize(frame, given) {
@@ -49,7 +50,7 @@ class GameModel {
   }
 
   win() {
-    return this._state.level === this.data.length;
+    return this._state.level === NUMBER_QUESTIONS;
   }
 
   tick() {

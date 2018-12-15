@@ -4,6 +4,7 @@ import {NUMBER_QUESTIONS} from './../data/game';
 class StatsView extends AbstractView {
   constructor(state) {
     super();
+
     this.stats = state.stats;
   }
 

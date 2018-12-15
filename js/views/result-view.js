@@ -8,6 +8,7 @@ import {
 class ResultScreen extends AbstractView {
   constructor(model) {
     super();
+
     this.model = model;
   }
 

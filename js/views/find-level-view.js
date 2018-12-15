@@ -1,9 +1,11 @@
 import AbstractView from '../abstract-view';
 
 class FindLevelView extends AbstractView {
-  constructor(level) {
+  constructor({level = {}, isCorrect = ``} = {}) {
     super();
+
     this.level = level;
+    this.isCorrect = isCorrect;
   }
 
   get template() {
@@ -18,12 +20,9 @@ class FindLevelView extends AbstractView {
     </section>`;
   }
 
-  onAnswer() {
+  onAnswer() {}
 
-  }
-
-  onImageLoad() {
-  }
+  onImageLoad() {}
 
   bind() {
     const images = this.element.querySelectorAll(`.game__option > img`);
@@ -37,8 +36,7 @@ class FindLevelView extends AbstractView {
     answerButton.forEach((it) => {
       it.addEventListener(`click`, (evt) => {
         evt.preventDefault();
-        const isCorrect = this.level.answers[this.level.answers.length - 1].type;
-        const answer = it.dataset.type === isCorrect;
+        const answer = it.dataset.type === this.isCorrect;
         it.classList.add(`game__option--selected`);
         this.onAnswer(answer);
       });

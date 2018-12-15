@@ -3,6 +3,7 @@ import AbstractView from '../abstract-view';
 class ErrorPopupView extends AbstractView {
   constructor(message) {
     super();
+
     this.message = message;
   }
 
