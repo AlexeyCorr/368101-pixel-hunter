@@ -2,8 +2,7 @@ import {
   InitialGame,
   die, tick,
   changeLevel,
-  resize, ResultType,
-  sumPoints
+  resize, ResultType
 } from './game';
 
 class GameModel {
@@ -55,10 +54,6 @@ class GameModel {
 
   tick() {
     this._state = tick(this._state);
-  }
-
-  getSumPoints(answers, lives) {
-    return sumPoints(answers, lives);
   }
 
   getStats(state) {

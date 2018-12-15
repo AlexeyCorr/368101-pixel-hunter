@@ -1,60 +1,61 @@
 import AbstractView from '../abstract-view';
 import {
   NUMBER_QUESTIONS,
-  PointsAnwser
+  PointsAnwser,
+  sumPoints
 } from './../data/game';
 
 class ResultScreen extends AbstractView {
   constructor(model) {
     super();
     this.model = model;
-    this.state = this.model.state;
   }
 
   get template() {
     return `
       <section class="result">
-        <h2 class="result__title">${this.model.playerName} вы ${this.model.isDead() ? `проиграли!` : `победили!`}</h2>
+        <h2 class="result__title">${this.model[this.model.length - 1].playerName} вы ${this.model[this.model.length - 1]._state.lives === 0 ? `проиграли!` : `победили!`}</h2>
+        ${this.model.reverse().map((game, index) => `
         <table class="result__table">
           <tr>
-            <td class="result__number">1.</td>
+            <td class="result__number">${index + 1}.</td>
             <td colspan="2">
               <ul class="stats">
-              ${this.state.stats.map((it) => `<li class="stats__result stats__result--${it}"></li>`)
+              ${game._state.stats.map((it) => `<li class="stats__result stats__result--${it}"></li>`)
                 .join(``)}
-              ${new Array(NUMBER_QUESTIONS - this.state.stats.length)
+              ${new Array(NUMBER_QUESTIONS - game._state.stats.length)
                 .fill(`<li class="stats__result stats__result--unknown"></li>`)
                 .join(``)}
               </ul>
             </td>
             <td class="result__points">× ${PointsAnwser.CORRECT}</td>
-            <td class="result__total">${PointsAnwser.CORRECT * this.state.answers.filter(({isCorrect}) => isCorrect).length}</td>
+            <td class="result__total">${PointsAnwser.CORRECT * game._state.answers.filter(({isCorrect}) => isCorrect).length}</td>
           </tr>
-          ${!this.model.isDead() ? `<tr>
+          ${game._state.lives !== 0 ? `<tr>
             <td></td>
             <td class="result__extra">Бонус за скорость:</td>
-            <td class="result__extra">${this.state.answers.filter(({time}) => time < 10).length} <span class="stats__result stats__result--fast"></span></td>
+            <td class="result__extra">${game._state.answers.filter(({time}) => time < 10).length} <span class="stats__result stats__result--fast"></span></td>
             <td class="result__points">× ${PointsAnwser.FAST - PointsAnwser.CORRECT}</td>
-            <td class="result__total">${(PointsAnwser.FAST - PointsAnwser.CORRECT) * this.state.answers.filter(({time}) => time < 10).length}</td>
+            <td class="result__total">${(PointsAnwser.FAST - PointsAnwser.CORRECT) * game._state.answers.filter(({time}) => time < 10).length}</td>
           </tr>
           <tr>
             <td></td>
             <td class="result__extra">Бонус за жизни:</td>
-            <td class="result__extra">${this.state.lives} <span class="stats__result stats__result--alive"></span></td>
+            <td class="result__extra">${game._state.lives} <span class="stats__result stats__result--alive"></span></td>
             <td class="result__points">× ${PointsAnwser.BONUS}</td>
-            <td class="result__total">${PointsAnwser.BONUS * this.state.lives}</td>
+            <td class="result__total">${PointsAnwser.BONUS * game._state.lives}</td>
           </tr>
           <tr>
             <td></td>
             <td class="result__extra">Штраф за медлительность:</td>
-            <td class="result__extra">${this.state.answers.filter(({time}) => time > 20).length} <span class="stats__result stats__result--slow"></span></td>
+            <td class="result__extra">${game._state.answers.filter(({time}) => time > 20).length} <span class="stats__result stats__result--slow"></span></td>
             <td class="result__points">× ${PointsAnwser.SLOW}</td>
-            <td class="result__total">-${PointsAnwser.SLOW * this.state.answers.filter(({time}) => time > 20).length}</td>
+            <td class="result__total">-${PointsAnwser.SLOW * game._state.answers.filter(({time}) => time > 20).length}</td>
           </tr>
           <tr>` : ``}
-            <td colspan="5" class="result__total  result__total--final">${this.model.getSumPoints(this.state.answers, this.state.lives)}</td>
+            <td colspan="5" class="result__total  result__total--final">${sumPoints(game._state.answers, game._state.lives)}</td>
           </tr>
-        </table>
+        </table>`).join(``)}
       </section>`;
   }
 }

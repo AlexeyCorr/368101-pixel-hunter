@@ -1,5 +1,6 @@
 import IntroScreen from './screens/intro-screen';
 import WelcomeScreen from './screens/welcome-screen';
+import Loader from './loader';
 import RulesScreen from './screens/rules-screen';
 import ResultScreen from './screens/result-screen';
 import ConfirmPopupScreen from './screens/confirm-popup-screen';
@@ -21,25 +22,14 @@ const changeView = (element) => {
 const showPopup = (element) => body.appendChild(element);
 const hidePopup = (element) => body.removeChild(element);
 
-const checkStatus = (response) => {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
-  } else {
-    throw new Error(`${response.status}: ${response.statusText}`);
-  }
-};
-let gameData;
 class Application {
 
   static startGame(playerName) {
     const loading = new LoadingView();
     changeView(loading.element);
-    window.fetch(`https://es.dump.academy/pixel-hunter/questions`)
-      .then(checkStatus)
-      .then((response) => response.json())
-      .then((data) => gameData = data)
-      .then((gameData) => Application.showGame(gameData, playerName))
-      .catch((error) => Application.showErrorPopup(error));
+    Loader.loadData()
+      .then((data) => Application.showGame(data, playerName))
+      .catch(Application.showErrorPopup);
   }
 
   static showIntro() {
@@ -57,15 +47,22 @@ class Application {
     changeView(rules.element);
   }
 
-  static showGame(gameData, playerName) {
-    const gameScreen = new GameScreen(new GameModel(gameData, playerName));
+  static showGame(data, playerName) {
+    const gameScreen = new GameScreen(new GameModel(data, playerName));
     changeView(gameScreen.element);
     gameScreen.startGame();
   }
 
   static showResult(model) {
-    const results = new ResultScreen(model);
-    changeView(results.element);
+    const playerName = model.playerName;
+    const loading = new LoadingView();
+    changeView(loading.element);
+    Loader.saveResult(playerName, model)
+      .then(() => Loader.loadResult(playerName))
+      .then((model) => {
+        const results = new ResultScreen(model);
+        changeView(results.element);
+      }).catch(Application.showErrorPopup);
   }
 
   static showErrorPopup(message) {

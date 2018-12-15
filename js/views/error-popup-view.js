@@ -11,7 +11,8 @@ class ErrorPopupView extends AbstractView {
       <section class="modal">
       <div class="modal__inner">
         <h2 class="modal__title">Произошла ошибка!</h2>
-        <p class="modal__text modal__text--error">${this.message}.<br> Пожалуйста, перезагрузите страницу.</p>
+        <p class="modal__text modal__text--error">${this.message}</p>
+        <p class="modal__text modal__text--error">Пожалуйста, перезагрузите страницу.</p>
       </div>
     </section>`;
   }
