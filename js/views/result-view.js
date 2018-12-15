@@ -54,6 +54,7 @@ class ResultScreen extends AbstractView {
             <td class="result__total">-${PointsAnwser.SLOW * game._state.answers.filter(({time}) => time > 20).length}</td>
           </tr>
           <tr>` : ``}
+            <td>${new Intl.DateTimeFormat(`ru-RU`).format(new Date(game.date))}</td>
             <td colspan="5" class="result__total  result__total--final">${sumPoints(game._state.answers, game._state.lives)}</td>
           </tr>
         </table>`).join(``)}
