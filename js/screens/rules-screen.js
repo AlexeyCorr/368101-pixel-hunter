@@ -6,7 +6,7 @@ class RulesScreen {
   constructor() {
     this.buttonBack = new ButtonBackView();
     this.content = new RulesView();
-    this.content.onClick = this.gameStart.bind(this);
+    this.content.onClick = this.startGame.bind(this);
 
     this.header = document.createElement(`header`);
     this.header.classList.add(`header`);
@@ -21,8 +21,8 @@ class RulesScreen {
     return this.element;
   }
 
-  gameStart(playerName) {
-    this.content.onClick = Application.showGame(playerName);
+  startGame(playerName) {
+    this.content.onClick = Application.startGame(playerName);
   }
 
 }

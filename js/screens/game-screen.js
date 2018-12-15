@@ -75,9 +75,9 @@ class GameScreen {
     const type = level.type;
 
     const gameView = {
-      oneImage: new ChoiceLevelView(level),
-      twoImages: new ChoiceLevelView(level),
-      threeImages: new FindLevelView(level)
+      'tinder-like': new ChoiceLevelView(level),
+      'two-of-two': new ChoiceLevelView(level),
+      'one-of-three': new FindLevelView(level)
     };
 
     const view = gameView[type];
@@ -104,9 +104,6 @@ class GameScreen {
 
   updateTimer() {
     const timer = new TimerView(this.model.state);
-    if (this.model.state.time <= 5) {
-      timer.element.classList.add(`game__timer--blink`);
-    }
     this.header.replaceChild(timer.element, this.timer.element);
     this.timer = timer;
   }

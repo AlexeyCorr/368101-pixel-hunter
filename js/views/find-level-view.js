@@ -1,7 +1,5 @@
 import AbstractView from '../abstract-view';
 
-const isCorrect = `paint`;
-
 class FindLevelView extends AbstractView {
   constructor(level) {
     super();
@@ -14,7 +12,7 @@ class FindLevelView extends AbstractView {
       <p class="game__task">${this.level.question}</p>
       <form class="game__content game__content--triple">
         ${[...this.level.answers].map((it, index) =>`<div class="game__option" data-type="${it.type}">
-        <img src="${it.image.src || `http://placehold.it/304x455`}" alt="Option ${index}" width="304" height="455">
+        <img src="${it.image.url || `http://placehold.it/304x455`}" alt="Option ${index}" width="304" height="455">
         </div>`).join(``)}
       </form>
     </section>`;
@@ -39,6 +37,7 @@ class FindLevelView extends AbstractView {
     answerButton.forEach((it) => {
       it.addEventListener(`click`, (evt) => {
         evt.preventDefault();
+        const isCorrect = this.level.answers[this.level.answers.length - 1].type;
         const answer = it.dataset.type === isCorrect;
         it.classList.add(`game__option--selected`);
         this.onAnswer(answer);

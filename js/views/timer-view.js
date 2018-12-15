@@ -7,7 +7,7 @@ class TimerView extends AbstractView {
   }
 
   get template() {
-    return `<div class="game__timer">${this.state.time}</div>`;
+    return `<div class="game__timer ${this.state.time <= 5 ? `game__timer--blink` : ``}">${this.state.time}</div>`;
   }
 }
 
