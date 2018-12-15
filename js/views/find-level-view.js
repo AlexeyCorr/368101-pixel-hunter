@@ -1,10 +1,10 @@
 import AbstractView from '../abstract-view';
 
 class FindLevelView extends AbstractView {
-  constructor({level = {}, isCorrect = ``} = {}) {
+  constructor({game = {}, isCorrect = ``} = {}) {
     super();
 
-    this.level = level;
+    this.level = game;
     this.isCorrect = isCorrect;
   }
 

@@ -83,9 +83,9 @@ class GameScreen {
     };
 
     const gameView = {
-      'tinder-like': new ChoiceLevelView({level: level, wide: true}),
-      'two-of-two': new ChoiceLevelView({level: level, wide: false}),
-      'one-of-three': new FindLevelView({level: level, isCorrect: isCorrect(level)})
+      'tinder-like': new ChoiceLevelView({game: level, wide: true}),
+      'two-of-two': new ChoiceLevelView({game: level, wide: false}),
+      'one-of-three': new FindLevelView({game: level, isCorrect: isCorrect(level)})
     };
 
     const view = gameView[levelType];

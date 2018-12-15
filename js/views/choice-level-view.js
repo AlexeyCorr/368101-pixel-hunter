@@ -1,10 +1,10 @@
 import AbstractView from '../abstract-view';
 
 class ChoiceLevelView extends AbstractView {
-  constructor({level = {}, wide = false} = {}) {
+  constructor({game = {}, wide = false} = {}) {
     super();
 
-    this.level = level;
+    this.level = game;
     this.wide = wide;
   }
 
