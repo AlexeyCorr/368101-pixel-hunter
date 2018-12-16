@@ -1,7 +1,4 @@
-export const DebugStyle = {
-  BORDER: `border-color: rebeccapurple;`,
-  BACKGROUND: `background-color: rebeccapurple;`
-};
+export const debugStyle = `border: 5px solid rebeccapurple;`;
 
 const hash = window.location.hash.replace(`#`, ``);
 

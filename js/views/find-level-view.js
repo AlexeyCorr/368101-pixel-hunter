@@ -1,5 +1,5 @@
 import AbstractView from '../abstract-view';
-import {isDebug, DebugStyle} from './../settings';
+import {isDebug, debugStyle} from './../settings';
 
 class FindLevelView extends AbstractView {
   constructor({game = {}, isCorrect = ``} = {}) {
@@ -14,7 +14,7 @@ class FindLevelView extends AbstractView {
       <section class="game">
       <p class="game__task">${this.level.question}</p>
       <form class="game__content game__content--triple">
-        ${[...this.level.answers].map((it, index) =>`<div class="game__option" style="${isDebug(it.type, this.isCorrect) ? DebugStyle.BORDER : ``}" data-type="${it.type}">
+        ${[...this.level.answers].map((it, index) =>`<div class="game__option" style="${isDebug(it.type, this.isCorrect) ? debugStyle : ``}" data-type="${it.type}">
         <img src="${it.image.url || `http://placehold.it/304x455`}" alt="Option ${index}" width="304" height="455">
         </div>`).join(``)}
       </form>

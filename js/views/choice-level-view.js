@@ -1,5 +1,5 @@
 import AbstractView from '../abstract-view';
-import {isDebug, DebugStyle} from './../settings';
+import {isDebug, debugStyle} from './../settings';
 
 class ChoiceLevelView extends AbstractView {
   constructor({game = {}, wide = false} = {}) {
@@ -18,11 +18,11 @@ class ChoiceLevelView extends AbstractView {
           <img src="${it.image.url || `http://placehold.it/468x458`}" alt="Option ${index}" width="${it.image.width}" height="${it.image.height}">
           <label class="game__answer game__answer--photo">
             <input class="visually-hidden" name="question${index}" type="radio" value="photo">
-            <span style="${isDebug(it.type, `photo`) ? DebugStyle.BACKGROUND : ``}">Фото</span>
+            <span style="${isDebug(it.type, `photo`) ? debugStyle : ``}">Фото</span>
           </label>
           <label class="game__answer game__answer--paint">
             <input class="visually-hidden" name="question${index}" type="radio" value="painting">
-            <span style="${isDebug(it.type, `painting`) ? DebugStyle.BACKGROUND : ``}">Рисунок</span>
+            <span style="${isDebug(it.type, `painting`) ? debugStyle : ``}">Рисунок</span>
           </label>
         </div>`).join(``)}
       </form>
