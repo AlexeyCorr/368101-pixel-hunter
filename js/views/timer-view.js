@@ -1,13 +1,15 @@
 import AbstractView from './../abstract-view';
 
 class TimerView extends AbstractView {
-  constructor(state) {
+  constructor({time = 0, blink = false} = {}) {
     super();
-    this.state = state;
+
+    this.time = time;
+    this.blinging = blink;
   }
 
   get template() {
-    return `<div class="game__timer ${this.state.time <= 5 ? `game__timer--blink` : ``}">${this.state.time}</div>`;
+    return `<div class="game__timer ${this.blinging ? `game__timer--blink` : ``}">${this.time}</div>`;
   }
 }
 

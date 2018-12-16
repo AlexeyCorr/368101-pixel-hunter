@@ -10,8 +10,9 @@ import {InitialGame} from './../data/game';
 class GameScreen {
   constructor(model) {
     this.model = model;
+
     this.buttonBack = new ButtonBackView();
-    this.timer = new TimerView(this.model.state);
+    this.timer = new TimerView({time: this.model.state.time, blink: this.model.state.time <= 5});
     this.lives = new LivesView(this.model.state);
     this.gameContent = this.getGameView(this.model.getCurrentLevel());
     this.stats = new StatsView(this.model.state);
@@ -21,6 +22,7 @@ class GameScreen {
     this.header.appendChild(this.buttonBack.element);
     this.header.appendChild(this.timer.element);
     this.header.appendChild(this.lives.element);
+
     this.root = document.createElement(`div`);
     this.root.appendChild(this.header);
     this.root.appendChild(this.gameContent.element);
@@ -72,15 +74,21 @@ class GameScreen {
   }
 
   getGameView(level) {
-    const type = level.type;
-
-    const gameView = {
-      'tinder-like': new ChoiceLevelView(level),
-      'two-of-two': new ChoiceLevelView(level),
-      'one-of-three': new FindLevelView(level)
+    const levelType = level.type;
+    const isCorrect = (model) => {
+      return model.answers
+        .map(({type}) => type)
+        .filter((it, i, arr) => arr.indexOf(it) === arr.lastIndexOf(it))
+        .join(``);
     };
 
-    const view = gameView[type];
+    const gameView = {
+      'tinder-like': new ChoiceLevelView({game: level, wide: true}),
+      'two-of-two': new ChoiceLevelView({game: level, wide: false}),
+      'one-of-three': new FindLevelView({game: level, isCorrect: isCorrect(level)})
+    };
+
+    const view = gameView[levelType];
 
     view.onAnswer = this.onAnswer.bind(this);
     view.onImageLoad = this.imageResize.bind(this);
@@ -103,7 +111,7 @@ class GameScreen {
   }
 
   updateTimer() {
-    const timer = new TimerView(this.model.state);
+    const timer = new TimerView({time: this.model.state.time, blink: this.model.state.time <= 5});
     this.header.replaceChild(timer.element, this.timer.element);
     this.timer = timer;
   }

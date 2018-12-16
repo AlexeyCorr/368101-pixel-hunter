@@ -1,9 +1,12 @@
 import AbstractView from '../abstract-view';
+import {isDebug, debugStyle} from './../settings';
 
 class FindLevelView extends AbstractView {
-  constructor(level) {
+  constructor({game = {}, isCorrect = ``} = {}) {
     super();
-    this.level = level;
+
+    this.level = game;
+    this.isCorrect = isCorrect;
   }
 
   get template() {
@@ -11,19 +14,16 @@ class FindLevelView extends AbstractView {
       <section class="game">
       <p class="game__task">${this.level.question}</p>
       <form class="game__content game__content--triple">
-        ${[...this.level.answers].map((it, index) =>`<div class="game__option" data-type="${it.type}">
+        ${[...this.level.answers].map((it, index) =>`<div class="game__option" style="${isDebug(it.type, this.isCorrect) ? debugStyle : ``}" data-type="${it.type}">
         <img src="${it.image.url || `http://placehold.it/304x455`}" alt="Option ${index}" width="304" height="455">
         </div>`).join(``)}
       </form>
     </section>`;
   }
 
-  onAnswer() {
+  onAnswer() {}
 
-  }
-
-  onImageLoad() {
-  }
+  onImageLoad() {}
 
   bind() {
     const images = this.element.querySelectorAll(`.game__option > img`);
@@ -37,8 +37,7 @@ class FindLevelView extends AbstractView {
     answerButton.forEach((it) => {
       it.addEventListener(`click`, (evt) => {
         evt.preventDefault();
-        const isCorrect = this.level.answers[this.level.answers.length - 1].type;
-        const answer = it.dataset.type === isCorrect;
+        const answer = it.dataset.type === this.isCorrect;
         it.classList.add(`game__option--selected`);
         this.onAnswer(answer);
       });
