@@ -23,18 +23,15 @@ const showPopup = (element) => body.appendChild(element);
 const hidePopup = (element) => body.removeChild(element);
 
 class Application {
-
-  static startGame(playerName) {
-    const loading = new LoadingView();
-    changeView(loading.element);
-    Loader.loadData()
-      .then((data) => Application.showGame(data, playerName))
-      .catch(Application.showErrorPopup);
-  }
-
-  static showIntro() {
+  static async load() {
     const intro = new IntroScreen();
     changeView(intro.element);
+    try {
+      this.gameData = await Loader.loadData();
+      Application.showWelcome();
+    } catch (error) {
+      Application.showErrorPopup(error);
+    }
   }
 
   static showWelcome() {
@@ -47,27 +44,29 @@ class Application {
     changeView(rules.element);
   }
 
-  static showGame(data, playerName) {
-    const gameScreen = new GameScreen(new GameModel(data, playerName));
+  static showGame(playerName) {
+    const gameScreen = new GameScreen(new GameModel(this.gameData, playerName));
     changeView(gameScreen.element);
     gameScreen.startGame();
   }
 
-  static showResult(model) {
+  static async showResult(model) {
     const playerName = model.playerName;
     const loading = new LoadingView();
     changeView(loading.element);
-    Loader.saveResult(playerName, model)
-      .then(() => Loader.loadResult(playerName))
-      .then((model) => {
-        const results = new ResultScreen(model);
-        changeView(results.element);
-      }).catch(Application.showErrorPopup);
+    try {
+      await Loader.saveResult(playerName, model);
+      this.model = await Loader.loadResult(playerName);
+      const results = new ResultScreen(this.model);
+      changeView(results.element);
+    } catch (error) {
+      Application.showErrorPopup(error);
+    }
   }
 
   static showErrorPopup(message) {
     const errorPopup = new ErrorPopupView(message);
-    showPopup(errorPopup.element);
+    errorPopup.show();
   }
 
   static showConfirmPopup() {

@@ -17,6 +17,10 @@ class ErrorPopupView extends AbstractView {
       </div>
     </section>`;
   }
+
+  show() {
+    document.body.appendChild(this.element);
+  }
 }
 
 export default ErrorPopupView;
