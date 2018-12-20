@@ -22,12 +22,14 @@ const changeView = (element) => {
 const showPopup = (element) => body.appendChild(element);
 const hidePopup = (element) => body.removeChild(element);
 
+let gameData;
+
 class Application {
   static async load() {
     const intro = new IntroScreen();
     changeView(intro.element);
     try {
-      this.gameData = await Loader.loadData();
+      gameData = await Loader.loadData();
       Application.showWelcome();
     } catch (error) {
       Application.showErrorPopup(error);
@@ -45,7 +47,7 @@ class Application {
   }
 
   static showGame(playerName) {
-    const gameScreen = new GameScreen(new GameModel(this.gameData, playerName));
+    const gameScreen = new GameScreen(new GameModel(gameData, playerName));
     changeView(gameScreen.element);
     gameScreen.startGame();
   }
@@ -56,8 +58,7 @@ class Application {
     changeView(loading.element);
     try {
       await Loader.saveResult(playerName, model);
-      this.model = await Loader.loadResult(playerName);
-      const results = new ResultScreen(this.model);
+      const results = new ResultScreen(await Loader.loadResult(playerName));
       changeView(results.element);
     } catch (error) {
       Application.showErrorPopup(error);
@@ -66,7 +67,7 @@ class Application {
 
   static showErrorPopup(message) {
     const errorPopup = new ErrorPopupView(message);
-    errorPopup.show();
+    showPopup(errorPopup.element);
   }
 
   static showConfirmPopup() {

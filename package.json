@@ -6,11 +6,13 @@
   "scripts": {
     "eslint": "eslint ./gulpfile.js js/**/*.js",
     "stylelint": "stylelint 'sass/**/*.scss' --syntax scss",
-    "build": "gulp build && gulp compress",
+    "build": "gulp build",
     "start": "gulp serve",
     "test": "npm run eslint && npm run stylelint && gulp test"
   },
   "devDependencies": {
+    "@babel/core": "7.2.2",
+    "@babel/preset-env": "7.2.0",
     "autoprefixer": "9.0.2",
     "browser-sync": "2.24.6",
     "chai": "4.2.0",
@@ -29,19 +31,17 @@
     "gulp-sass": "4.0.1",
     "gulp-sourcemaps": "2.6.4",
     "gulp-svgstore": "6.1.1",
+    "gulp-terser": "1.1.6",
+    "rollup-plugin-babel": "4.1.0",
     "rollup-plugin-commonjs": "9.2.0",
+    "rollup-plugin-node-resolve": "4.0.0",
     "stylelint": "9.4.x",
-    "gulp-uglify": "3.0.1",
     "stylelint-config-htmlacademy": "0.1.x"
   },
   "engines": {
     "node": "10"
   },
   "dependencies": {
-    "@babel/core": "7.2.2",
-    "@babel/polyfill": "7.0.0",
-    "@babel/preset-env": "7.2.0",
-    "rollup-plugin-babel": "4.1.0",
-    "rollup-plugin-node-resolve": "4.0.0"
+    "@babel/polyfill": "7.0.0"
   }
 }
