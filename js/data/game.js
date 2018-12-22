@@ -66,15 +66,21 @@ export const changeLevel = (game, level) => {
   });
 };
 
-export const die = (state) => ({
-  ...state,
-  lives: state.lives - 1
-});
+export const die = (game) => {
+  const lives = game.lives - 1;
 
-export const tick = (state) => ({
-  ...state,
-  time: state.time - 1
-});
+  return Object.assign({}, game, {
+    lives
+  });
+};
+
+export const tick = (game) => {
+  const time = game.time - 1;
+
+  return Object.assign({}, game, {
+    time
+  });
+};
 
 export const resize = (frame, given) => {
   const obj = {};

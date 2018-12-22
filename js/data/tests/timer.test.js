@@ -11,7 +11,9 @@ describe(`tick`, () => {
 
   times.forEach((time) => {
     it(`should return ${InitialGame.time - time} after ${time} seconds`, () => {
-      const timer = () => setInterval(() => tick(InitialGame), SECOND);
+      const timer = () => setInterval(() => {
+        tick(InitialGame), SECOND
+      });
       setTimeout(() => {
         assert.deepStrictEqual(timer.time, `${InitialGame.time - time}`);
         clearInterval(timer);

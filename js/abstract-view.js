@@ -18,12 +18,12 @@ class AbstractView {
   }
 
   get element() {
-  if (this._element === null) {
-    this._element = this.render();
-    this.bind();
-  }
+    if (this._element === null) {
+      this._element = this.render();
+      this.bind();
+    }
 
-  return this._element;
+    return this._element;
   }
 
   render() {
