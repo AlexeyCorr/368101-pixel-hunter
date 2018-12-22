@@ -1,5 +1,5 @@
 import AbstractView from '../abstract-view';
-import {NUMBER_QUESTIONS} from './../data/game';
+import {Limit} from './../data/game';
 
 class StatsView extends AbstractView {
   constructor(state) {
@@ -13,7 +13,7 @@ class StatsView extends AbstractView {
       <ul class="stats">
         ${this.stats.map((it) => `<li class="stats__result stats__result--${it}"></li>`)
           .join(``)}
-        ${new Array(NUMBER_QUESTIONS - this.stats.length)
+        ${new Array(Limit.QUESTIONS - this.stats.length)
           .fill(`<li class="stats__result stats__result--unknown"></li>`)
           .join(``)}
       </ul>`;

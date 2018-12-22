@@ -1,6 +1,6 @@
 import AbstractView from '../abstract-view';
 import {
-  NUMBER_QUESTIONS,
+  Limit,
   PointsAnwser,
   sumPoints
 } from './../data/game';
@@ -24,7 +24,7 @@ class ResultScreen extends AbstractView {
               <ul class="stats">
               ${game._state.stats.map((it) => `<li class="stats__result stats__result--${it}"></li>`)
                 .join(``)}
-              ${new Array(NUMBER_QUESTIONS - game._state.stats.length)
+              ${new Array(Limit.QUESTIONS - game._state.stats.length)
                 .fill(`<li class="stats__result stats__result--unknown"></li>`)
                 .join(``)}
               </ul>

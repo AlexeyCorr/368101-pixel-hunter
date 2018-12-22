@@ -22,10 +22,6 @@ class RulesView extends AbstractView {
       </section>`;
   }
 
-  onClick() {
-
-  }
-
   bind() {
     const continueButton = this.element.querySelector(`.rules__button`);
     const nameField = this.element.querySelector(`.rules__input`);
@@ -40,6 +36,8 @@ class RulesView extends AbstractView {
       this.onClick(playerName);
     });
   }
+
+  onClick() {}
 }
 
 export default RulesView;

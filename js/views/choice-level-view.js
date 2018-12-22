@@ -2,11 +2,12 @@ import AbstractView from '../abstract-view';
 import {isDebug, debugStyle} from './../settings';
 
 class ChoiceLevelView extends AbstractView {
-  constructor({game = {}, wide = false} = {}) {
+  constructor({game = {}, wide = false, images = []} = {}) {
     super();
 
     this.level = game;
     this.wide = wide;
+    this.images = images;
   }
 
   get template() {
@@ -29,13 +30,6 @@ class ChoiceLevelView extends AbstractView {
     </section>`;
   }
 
-  onAnswer() {
-
-  }
-
-  onImageLoad() {
-  }
-
   bind() {
     const images = this.element.querySelectorAll(`.game__option > img`);
     images.forEach((image) => {
@@ -51,12 +45,12 @@ class ChoiceLevelView extends AbstractView {
       const answers = [];
 
       options.forEach((option) => {
-        let type = option.dataset.type;
-        let answerButtons = option.querySelectorAll(`input[type=radio]`);
+        const type = option.dataset.type;
+        const answerButtons = option.querySelectorAll(`input[type=radio]`);
 
         answerButtons.forEach((it) => {
           if (it.checked) {
-            let value = it.value;
+            const value = it.value;
             answers.push(type === value);
           }
         });
@@ -67,6 +61,10 @@ class ChoiceLevelView extends AbstractView {
       }
     });
   }
+
+  onAnswer() {}
+
+  onImageLoad() {}
 }
 
 export default ChoiceLevelView;

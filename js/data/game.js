@@ -1,10 +1,13 @@
-export const NUMBER_QUESTIONS = 10;
-export const MAX_LIVES = 3;
+export const Limit = {
+  QUESTIONS: 10,
+  LIVES: 3,
+  TIME: 30
+};
 
 export const InitialGame = Object.freeze({
   level: 0,
-  lives: MAX_LIVES,
-  time: 30,
+  lives: Limit.LIVES,
+  time: Limit.TIME,
   answers: [],
   stats: []
 });
@@ -25,7 +28,7 @@ export const ResultType = {
 };
 
 export const sumPoints = (answers, lives) => {
-  if (answers.length < NUMBER_QUESTIONS || lives < 1) {
+  if (answers.length < Limit.QUESTIONS || lives < 1) {
     return `fail`;
   }
 
@@ -54,8 +57,8 @@ export const changeLevel = (game, level) => {
     throw new Error(`Level should not be negative value`);
   }
 
-  if (level > NUMBER_QUESTIONS) {
-    throw new Error(`Level can not be more than NUMBER_QUESTIONS`);
+  if (level > Limit.QUESTIONS) {
+    throw new Error(`Level can not be more than 10`);
   }
 
   return Object.assign({}, game, {
@@ -63,23 +66,15 @@ export const changeLevel = (game, level) => {
   });
 };
 
-export const canContinue = (game) => game.lives > 0;
+export const die = (state) => ({
+  ...state,
+  lives: state.lives - 1
+});
 
-export const die = (game) => {
-  const lives = game.lives - 1;
-
-  return Object.assign({}, game, {
-    lives
-  });
-};
-
-export const tick = (game) => {
-  const time = game.time - 1;
-
-  return Object.assign({}, game, {
-    time
-  });
-};
+export const tick = (state) => ({
+  ...state,
+  time: state.time - 1
+});
 
 export const resize = (frame, given) => {
   const obj = {};

@@ -1,5 +1,5 @@
 import AbstractView from './../abstract-view';
-import {MAX_LIVES} from './../data/game';
+import {Limit} from './../data/game';
 
 class LivesView extends AbstractView {
   constructor(state) {
@@ -10,7 +10,7 @@ class LivesView extends AbstractView {
 
   get template() {
     return `<div class="game__lives">
-    ${new Array(MAX_LIVES - this.state.lives)
+    ${new Array(Limit.LIVES - this.state.lives)
       .fill(`<img src="img/heart__empty.svg" class="game__heart" alt="Missed Life" width="31" height="27">`)
       .join(``)}
     ${new Array(this.state.lives)

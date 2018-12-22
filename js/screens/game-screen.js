@@ -1,4 +1,4 @@
-import ButtonBackView from './../views/button-back-view';
+import BackButtonView from './../views/back-button-view';
 import TimerView from './../views/timer-view';
 import LivesView from './../views/lives-view';
 import ChoiceLevelView from './../views/choice-level-view';
@@ -8,10 +8,12 @@ import Application from './../application';
 import {InitialGame} from './../data/game';
 
 class GameScreen {
-  constructor(model) {
+  constructor(model, images) {
     this.model = model;
+    this.preloadImages = images;
+    this.images = this.preloadImages[this.model.state.level];
 
-    this.buttonBack = new ButtonBackView();
+    this.backButton = new BackButtonView();
     this.timer = new TimerView({time: this.model.state.time, blink: this.model.state.time <= 5});
     this.lives = new LivesView(this.model.state);
     this.gameContent = this.getGameView(this.model.getCurrentLevel());
@@ -19,7 +21,7 @@ class GameScreen {
 
     this.header = document.createElement(`header`);
     this.header.classList.add(`header`);
-    this.header.appendChild(this.buttonBack.element);
+    this.header.appendChild(this.backButton.element);
     this.header.appendChild(this.timer.element);
     this.header.appendChild(this.lives.element);
 
@@ -45,10 +47,10 @@ class GameScreen {
       this.model.die();
     }
     let stat = this.model.getStats(result);
-    this.model.state.stats.push(stat);
-    this.model.state.answers.push(result);
+    this.model.addStats(stat);
+    this.model.addAnswer(result);
     this.updateStats();
-    if (this.model.hasNextLevel() && !this.model.isDead()) {
+    if (this.model.canContinue()) {
       this.model.nextLevel();
       this.startGame();
       this.changeLevel();
@@ -75,6 +77,7 @@ class GameScreen {
 
   getGameView(level) {
     const levelType = level.type;
+    const preloadImages = this.images;
     const isCorrect = (model) => {
       return model.answers
         .map(({type}) => type)
@@ -83,7 +86,7 @@ class GameScreen {
     };
 
     const gameView = {
-      'tinder-like': new ChoiceLevelView({game: level, wide: true}),
+      'tinder-like': new ChoiceLevelView({game: level, wide: true, images: preloadImages}),
       'two-of-two': new ChoiceLevelView({game: level, wide: false}),
       'one-of-three': new FindLevelView({game: level, isCorrect: isCorrect(level)})
     };

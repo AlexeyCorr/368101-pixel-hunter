@@ -17,6 +17,25 @@ class Loader {
     return fetch(`${SERVER_URL}/questions`).then(checkStatus).then(toJSON);
   }
 
+  static loadImage(data) {
+    const preloadImages = [];
+    data.forEach(({answers}) => {
+      const images = answers.map(({image}, index) => {
+        const {url, width, height} = image;
+        const img = new Image(width, height);
+
+        return new Promise((resolve, reject) => {
+          img.onload = () => resolve(img);
+          img.onerror = () => reject(new Error(`Error loading "${url}"`));
+          img.src = url;
+          img.alt = `Option ${index + 1}`;
+        });
+      });
+      preloadImages.push(images);
+    });
+    return Promise.all(preloadImages);
+  }
+
   static loadResult(playerName = DEFAULT_NAME) {
     return fetch(`${SERVER_URL}/stats/${APP_ID}-${playerName}`).then(checkStatus).then(toJSON);
   }
