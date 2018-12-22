@@ -1,4 +1,4 @@
-import AbstractView from '../abstract-view';
+import AbstractView from './../abstract-view';
 
 class ErrorPopupView extends AbstractView {
   constructor(message) {

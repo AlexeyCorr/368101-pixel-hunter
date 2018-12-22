@@ -1,5 +1,5 @@
 const SERVER_URL = `https://es.dump.academy/pixel-hunter`;
-const APP_ID = `59810122`;
+const APP_ID = `44499933`;
 const DEFAULT_NAME = `Kek`;
 
 const checkStatus = (response) => {
@@ -15,25 +15,6 @@ const toJSON = (response) => response.json();
 class Loader {
   static loadData() {
     return fetch(`${SERVER_URL}/questions`).then(checkStatus).then(toJSON);
-  }
-
-  static loadImage(data) {
-    const preloadImages = [];
-    data.forEach(({answers}) => {
-      const images = answers.map(({image}, index) => {
-        const {url, width, height} = image;
-        const img = new Image(width, height);
-
-        return new Promise((resolve, reject) => {
-          img.onload = () => resolve(img);
-          img.onerror = () => reject(new Error(`Error loading "${url}"`));
-          img.src = url;
-          img.alt = `Option ${index + 1}`;
-        });
-      });
-      preloadImages.push(images);
-    });
-    return Promise.all(preloadImages);
   }
 
   static loadResult(playerName = DEFAULT_NAME) {

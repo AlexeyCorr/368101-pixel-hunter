@@ -5,8 +5,8 @@ import RulesScreen from './screens/rules-screen';
 import ResultScreen from './screens/result-screen';
 import GameModel from './data/game-model';
 import GameScreen from './screens/game-screen';
-import LoadingView from './views/loading-view';
 import ErrorPopupView from './views/error-popup-view';
+import SplashScreen from './screens/splash-screen';
 
 const main = document.querySelector(`main`);
 
@@ -16,18 +16,20 @@ const changeView = (element) => {
 };
 
 let gameData;
-let images;
 
 class Application {
   static async load() {
     const intro = new IntroScreen();
+    const splash = new SplashScreen();
     changeView(intro.element);
+    splash.show();
     try {
       gameData = await Loader.loadData();
-      images = await Loader.loadImage(gameData);
       Application.showWelcome();
     } catch (error) {
       Application.showErrorPopup(error);
+    } finally {
+      splash.element.remove();
     }
   }
 
@@ -42,21 +44,23 @@ class Application {
   }
 
   static showGame(playerName) {
-    const gameScreen = new GameScreen(new GameModel(gameData, playerName), images);
+    const gameScreen = new GameScreen(new GameModel(gameData, playerName));
     changeView(gameScreen.element);
     gameScreen.startGame();
   }
 
   static async showResult(model) {
     const playerName = model.playerName;
-    const loading = new LoadingView();
-    changeView(loading.element);
+    const splash = new SplashScreen();
+    splash.show();
     try {
       await Loader.saveResult(playerName, model);
       const results = new ResultScreen(await Loader.loadResult(playerName));
       changeView(results.element);
     } catch (error) {
       Application.showErrorPopup(error);
+    } finally {
+      splash.element.remove();
     }
   }
 

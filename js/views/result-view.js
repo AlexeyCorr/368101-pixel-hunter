@@ -1,11 +1,11 @@
-import AbstractView from '../abstract-view';
+import AbstractView from './../abstract-view';
 import {
   Limit,
   PointsAnwser,
   sumPoints
 } from './../data/game';
 
-class ResultScreen extends AbstractView {
+class ResultView extends AbstractView {
   constructor(model) {
     super();
 
@@ -62,4 +62,4 @@ class ResultScreen extends AbstractView {
   }
 }
 
-export default ResultScreen;
+export default ResultView;

@@ -1,13 +1,12 @@
-import AbstractView from '../abstract-view';
+import AbstractView from './../abstract-view';
 import {isDebug, debugStyle} from './../settings';
 
 class ChoiceLevelView extends AbstractView {
-  constructor({game = {}, wide = false, images = []} = {}) {
+  constructor({game = {}, wide = false} = {}) {
     super();
 
     this.level = game;
     this.wide = wide;
-    this.images = images;
   }
 
   get template() {

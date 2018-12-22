@@ -67,10 +67,6 @@ class GameModel {
     return this.getLevel(this._state.level);
   }
 
-  win() {
-    return this._state.level === Limit.QUESTIONS;
-  }
-
   tick() {
     this._state = tick(this._state);
   }

@@ -8,10 +8,8 @@ import Application from './../application';
 import {InitialGame} from './../data/game';
 
 class GameScreen {
-  constructor(model, images) {
+  constructor(model) {
     this.model = model;
-    this.preloadImages = images;
-    this.images = this.preloadImages[this.model.state.level];
 
     this.backButton = new BackButtonView();
     this.timer = new TimerView({time: this.model.state.time, blink: this.model.state.time <= 5});
@@ -77,7 +75,6 @@ class GameScreen {
 
   getGameView(level) {
     const levelType = level.type;
-    const preloadImages = this.images;
     const isCorrect = (model) => {
       return model.answers
         .map(({type}) => type)
@@ -86,7 +83,7 @@ class GameScreen {
     };
 
     const gameView = {
-      'tinder-like': new ChoiceLevelView({game: level, wide: true, images: preloadImages}),
+      'tinder-like': new ChoiceLevelView({game: level, wide: true}),
       'two-of-two': new ChoiceLevelView({game: level, wide: false}),
       'one-of-three': new FindLevelView({game: level, isCorrect: isCorrect(level)})
     };
