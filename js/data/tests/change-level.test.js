@@ -2,7 +2,7 @@ import assert from 'assert';
 import {
   changeLevel,
   InitialGame,
-  NUMBER_QUESTIONS
+  Limit
 } from './../game';
 
 describe(`changeLevel`, () => {
@@ -20,7 +20,7 @@ describe(`changeLevel`, () => {
     assert.throws(() => changeLevel(InitialGame, -5).level, /Level should not be negative value/);
   });
 
-  it(`level should not be more than ${NUMBER_QUESTIONS}`, () => {
-    assert.throws(() => changeLevel(InitialGame, 99).level, /Level can not be more than NUMBER_QUESTIONS/);
+  it(`level should not be more than ${Limit.QUESTIONS}`, () => {
+    assert.throws(() => changeLevel(InitialGame, 99).level, /Level can not be more than 10/);
   });
 });

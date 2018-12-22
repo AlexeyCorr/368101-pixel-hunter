@@ -1,4 +1,4 @@
-import AbstractView from '../abstract-view';
+import AbstractView from './../abstract-view';
 
 class ConfirmPopupView extends AbstractView {
 
@@ -19,34 +19,34 @@ class ConfirmPopupView extends AbstractView {
     </section>`;
   }
 
-  onCancel() {}
-
-  onConfirm() {}
-
-  onPressKey() {}
-
   bind() {
     const closeButton = this.element.querySelector(`.modal__close`);
     const cancelButton = this.element.querySelector(`.modal__btn--cancel`);
     const confirmButton = this.element.querySelector(`.modal__btn--confirm`);
 
-    document.addEventListener(`keydown`, (evt) => {
-      this.onPressKey(evt);
-    });
-    closeButton.addEventListener(`click`, (evt) => {
+    const confirmHandler = (evt) => {
       evt.preventDefault();
-      this.onCancel();
-    });
-    cancelButton.addEventListener(`click`, (evt) => {
-      evt.preventDefault();
-      this.onCancel();
-    });
-    confirmButton.addEventListener(`click`, (evt) => {
-      evt.preventDefault();
+
       this.onConfirm();
       this.onCancel();
-    });
+    };
+
+    const cancelHandler = (evt) => {
+      evt.preventDefault();
+
+      this.onCancel();
+    };
+
+    closeButton.addEventListener(`click`, cancelHandler);
+    cancelButton.addEventListener(`click`, cancelHandler);
+    confirmButton.addEventListener(`click`, confirmHandler);
   }
+
+  onCancel() {}
+
+  onConfirm() {}
+
+  onPressKey() {}
 }
 
 export default ConfirmPopupView;

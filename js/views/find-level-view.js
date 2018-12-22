@@ -1,4 +1,4 @@
-import AbstractView from '../abstract-view';
+import AbstractView from './../abstract-view';
 import {isDebug, debugStyle} from './../settings';
 
 class FindLevelView extends AbstractView {
@@ -21,10 +21,6 @@ class FindLevelView extends AbstractView {
     </section>`;
   }
 
-  onAnswer() {}
-
-  onImageLoad() {}
-
   bind() {
     const images = this.element.querySelectorAll(`.game__option > img`);
     images.forEach((image) => {
@@ -43,6 +39,10 @@ class FindLevelView extends AbstractView {
       });
     });
   }
+
+  onAnswer() {}
+
+  onImageLoad() {}
 }
 
 export default FindLevelView;

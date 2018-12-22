@@ -1,7 +1,12 @@
 import AbstractView from './../abstract-view';
-import Application from './../application';
+import ConfirmPopupScreen from './../screens/confirm-popup-screen';
 
-class ButtonBackView extends AbstractView {
+class BackButtonView extends AbstractView {
+  constructor() {
+    super();
+
+    this.confirmPopup = new ConfirmPopupScreen();
+  }
 
   get template() {
     return `
@@ -20,9 +25,9 @@ class ButtonBackView extends AbstractView {
     const returnButton = this.element.querySelector(`.back`);
     returnButton.addEventListener(`click`, (evt) => {
       evt.preventDefault();
-      Application.showConfirmPopup();
+      this.confirmPopup.show();
     });
   }
 }
 
-export default ButtonBackView;
+export default BackButtonView;

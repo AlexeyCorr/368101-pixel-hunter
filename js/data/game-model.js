@@ -3,7 +3,7 @@ import {
   die, tick,
   changeLevel,
   resize, ResultType,
-  NUMBER_QUESTIONS
+  Limit
 } from './game';
 
 class GameModel {
@@ -17,8 +17,26 @@ class GameModel {
     return this._state;
   }
 
+  addAnswer(newAnswer) {
+    this._state = {
+      ...this._state,
+      answers: [...this._state.answers, newAnswer],
+    };
+  }
+
+  addStats(newStats) {
+    this._state = {
+      ...this._state,
+      stats: [...this._state.stats, newStats],
+    };
+  }
+
+  canContinue() {
+    return !this.isDead() && this.hasNextLevel();
+  }
+
   hasNextLevel() {
-    return this._state.level + 1 !== NUMBER_QUESTIONS;
+    return this._state.level + 1 !== Limit.QUESTIONS;
   }
 
   imageResize(frame, given) {
@@ -47,10 +65,6 @@ class GameModel {
 
   getCurrentLevel() {
     return this.getLevel(this._state.level);
-  }
-
-  win() {
-    return this._state.level === NUMBER_QUESTIONS;
   }
 
   tick() {

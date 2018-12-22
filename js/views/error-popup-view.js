@@ -1,4 +1,4 @@
-import AbstractView from '../abstract-view';
+import AbstractView from './../abstract-view';
 
 class ErrorPopupView extends AbstractView {
   constructor(message) {
@@ -16,6 +16,10 @@ class ErrorPopupView extends AbstractView {
         <p class="modal__text modal__text--error">Пожалуйста, перезагрузите страницу.</p>
       </div>
     </section>`;
+  }
+
+  show() {
+    document.body.appendChild(this.element);
   }
 }
 
