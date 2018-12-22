@@ -18,17 +18,17 @@ class GameModel {
   }
 
   addAnswer(newAnswer) {
-    this._state.answers = [
-      ...this._state.answers,
-      newAnswer
-    ];
+    this._state = {
+      ...this._state,
+      answers: [...this._state.answers, newAnswer],
+    };
   }
 
   addStats(newStats) {
-    this._state.stats = [
-      ...this._state.stats,
-      newStats
-    ];
+    this._state = {
+      ...this._state,
+      stats: [...this._state.stats, newStats],
+    };
   }
 
   canContinue() {
