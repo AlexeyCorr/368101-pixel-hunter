@@ -1,6 +1,6 @@
 import AbstractView from './../abstract-view';
 
-class SplashScreen extends AbstractView {
+class SplashView extends AbstractView {
 
   get template() {
     return `
@@ -14,4 +14,4 @@ class SplashScreen extends AbstractView {
   }
 }
 
-export default SplashScreen;
+export default SplashView;

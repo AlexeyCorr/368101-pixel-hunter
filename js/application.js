@@ -6,7 +6,7 @@ import ResultScreen from './screens/result-screen';
 import GameModel from './data/game-model';
 import GameScreen from './screens/game-screen';
 import ErrorPopupView from './views/error-popup-view';
-import SplashScreen from './screens/splash-screen';
+import SplashView from './views/splash-view';
 
 const main = document.querySelector(`main`);
 
@@ -20,7 +20,7 @@ let gameData;
 class Application {
   static async load() {
     const intro = new IntroScreen();
-    const splash = new SplashScreen();
+    const splash = new SplashView();
     changeView(intro.element);
     splash.show();
     try {
@@ -51,7 +51,7 @@ class Application {
 
   static async showResult(model) {
     const playerName = model.playerName;
-    const splash = new SplashScreen();
+    const splash = new SplashView();
     splash.show();
     try {
       await Loader.saveResult(playerName, model);

@@ -11,22 +11,22 @@ class GameScreen {
   constructor(model) {
     this._game = model;
 
-    this.backButton = new BackButtonView();
-    this.timer = new TimerView({time: this._game.state.time, blink: this._game.state.time <= 5});
-    this.lives = new LivesView(this._game.state);
-    this.gameContent = this._getGameView(this._game.getCurrentLevel());
-    this.stats = new StatsView(this._game.state);
+    const backButton = new BackButtonView();
+    this._timer = new TimerView({time: this._game.state.time, blink: this._game.state.time <= 5});
+    this._lives = new LivesView(this._game.state);
+    this._gameContent = this._getGameView(this._game.getCurrentLevel());
+    this._stats = new StatsView(this._game.state);
 
     this.header = document.createElement(`header`);
     this.header.classList.add(`header`);
-    this.header.appendChild(this.backButton.element);
-    this.header.appendChild(this.timer.element);
-    this.header.appendChild(this.lives.element);
+    this.header.appendChild(backButton.element);
+    this.header.appendChild(this._timer.element);
+    this.header.appendChild(this._lives.element);
 
     this._root = document.createElement(`div`);
     this._root.appendChild(this.header);
-    this._root.appendChild(this.gameContent.element);
-    this._root.appendChild(this.stats.element);
+    this._root.appendChild(this._gameContent.element);
+    this._root.appendChild(this._stats.element);
 
     this._interval = null;
   }
@@ -35,8 +35,8 @@ class GameScreen {
     return this._root;
   }
 
-  onAnswer(answer) {
-    this._stopGame();
+  _onAnswer(answer) {
+    this.stopGame();
     const result = {
       isCorrect: answer,
       time: InitialGame.time - this._game.state.time
@@ -44,7 +44,7 @@ class GameScreen {
     if (!result.isCorrect) {
       this._game.die();
     }
-    let stat = this._game.getStats(result);
+    const stat = this._game.getStats(result);
     this._game.addStats(stat);
     this._game.addAnswer(result);
     this._updateStats();
@@ -90,13 +90,13 @@ class GameScreen {
 
     const view = gameView[levelType];
 
-    view.onAnswer = this.onAnswer.bind(this);
+    view.onAnswer = this._onAnswer.bind(this);
     view.onImageLoad = this.imageResize.bind(this);
 
     return view;
   }
 
-  _stopGame() {
+  stopGame() {
     clearInterval(this._interval);
   }
 
@@ -104,7 +104,7 @@ class GameScreen {
     this._interval = setInterval(() => {
       this._game.tick();
       if (this._game.state.time === 0) {
-        this.onAnswer(false);
+        this._onAnswer(false);
       }
       this._updateTimer();
     }, 1000);
@@ -112,36 +112,36 @@ class GameScreen {
 
   _updateTimer() {
     const timer = new TimerView({time: this._game.state.time, blink: this._game.state.time <= 5});
-    this.header.replaceChild(timer.element, this.timer.element);
-    this.timer = timer;
+    this.header.replaceChild(timer.element, this._timer.element);
+    this._timer = timer;
   }
 
   _updateLives() {
     const lives = new LivesView(this._game.state);
-    this.header.replaceChild(lives.element, this.lives.element);
-    this.lives = lives;
+    this.header.replaceChild(lives.element, this._lives.element);
+    this._lives = lives;
   }
 
   _updateStats() {
     const stats = new StatsView(this._game.state);
-    this._root.replaceChild(stats.element, this.stats.element);
-    this.stats = stats;
+    this._root.replaceChild(stats.element, this._stats.element);
+    this._stats = stats;
   }
 
   _changeLevel() {
     this._updateLives();
     this._updateTimer();
     const level = this._getGameView(this._game.getCurrentLevel());
-    this.changeContentView(level);
+    this._changeContentView(level);
   }
 
   endGame() {
     Application.showResult(this._game);
   }
 
-  changeContentView(view) {
-    this._root.replaceChild(view.element, this.gameContent.element);
-    this.gameContent = view;
+  _changeContentView(view) {
+    this._root.replaceChild(view.element, this._gameContent.element);
+    this._gameContent = view;
   }
 }
 

@@ -4,17 +4,17 @@ import RulesView from './../views/rules-view';
 
 class RulesScreen {
   constructor() {
-    this.backButton = new BackButtonView();
-    this.content = new RulesView();
-    this.content.onClick = this.startGame.bind(this);
+    const backButton = new BackButtonView();
+    this._content = new RulesView();
+    this._content.onClick = this.startGame.bind(this);
 
     this.header = document.createElement(`header`);
     this.header.classList.add(`header`);
-    this.header.appendChild(this.backButton.element);
+    this.header.appendChild(backButton.element);
 
     this._root = document.createElement(`div`);
     this._root.appendChild(this.header);
-    this._root.appendChild(this.content.element);
+    this._root.appendChild(this._content.element);
   }
 
   get element() {
