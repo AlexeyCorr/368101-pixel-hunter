@@ -33,7 +33,7 @@ class FindLevelView extends AbstractView {
     answerButton.forEach((it) => {
       it.addEventListener(`click`, (evt) => {
         evt.preventDefault();
-        const answer = it.dataset.type === this.isCorrect;
+        const answer = it.dataset.type === this._isCorrect;
         it.classList.add(`game__option--selected`);
         this.onAnswer(answer);
       });
