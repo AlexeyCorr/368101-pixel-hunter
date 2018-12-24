@@ -5,16 +5,16 @@ class FindLevelView extends AbstractView {
   constructor({game = {}, isCorrect = ``} = {}) {
     super();
 
-    this.level = game;
-    this.isCorrect = isCorrect;
+    this._level = game;
+    this._isCorrect = isCorrect;
   }
 
   get template() {
     return `
       <section class="game">
-      <p class="game__task">${this.level.question}</p>
+      <p class="game__task">${this._level.question}</p>
       <form class="game__content game__content--triple">
-        ${[...this.level.answers].map((it, index) =>`<div class="game__option" style="${isDebug(it.type, this.isCorrect) ? debugStyle : ``}" data-type="${it.type}">
+        ${[...this._level.answers].map((it, index) =>`<div class="game__option" style="${isDebug(it.type, this._isCorrect) ? debugStyle : ``}" data-type="${it.type}">
         <img src="${it.image.url || `http://placehold.it/304x455`}" alt="Option ${index}" width="304" height="455">
         </div>`).join(``)}
       </form>

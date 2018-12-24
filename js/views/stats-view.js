@@ -5,15 +5,15 @@ class StatsView extends AbstractView {
   constructor(state) {
     super();
 
-    this.stats = state.stats;
+    this._stats = state.stats;
   }
 
   get template() {
     return `
       <ul class="stats">
-        ${this.stats.map((it) => `<li class="stats__result stats__result--${it}"></li>`)
+        ${this._stats.map((it) => `<li class="stats__result stats__result--${it}"></li>`)
           .join(``)}
-        ${new Array(Limit.QUESTIONS - this.stats.length)
+        ${new Array(Limit.QUESTIONS - this._stats.length)
           .fill(`<li class="stats__result stats__result--unknown"></li>`)
           .join(``)}
       </ul>`;

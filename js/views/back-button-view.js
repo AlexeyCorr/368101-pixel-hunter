@@ -5,7 +5,7 @@ class BackButtonView extends AbstractView {
   constructor() {
     super();
 
-    this.confirmPopup = new ConfirmPopupScreen();
+    this._confirmPopup = new ConfirmPopupScreen();
   }
 
   get template() {
@@ -25,7 +25,7 @@ class BackButtonView extends AbstractView {
     const returnButton = this.element.querySelector(`.back`);
     returnButton.addEventListener(`click`, (evt) => {
       evt.preventDefault();
-      this.confirmPopup.show();
+      this._confirmPopup.show();
     });
   }
 }

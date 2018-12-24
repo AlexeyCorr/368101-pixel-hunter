@@ -4,12 +4,12 @@ class TimerView extends AbstractView {
   constructor({time = 0, blink = false} = {}) {
     super();
 
-    this.time = time;
-    this.blinging = blink;
+    this._time = time;
+    this._blinging = blink;
   }
 
   get template() {
-    return `<div class="game__timer ${this.blinging ? `game__timer--blink` : ``}">${this.time}</div>`;
+    return `<div class="game__timer ${this._blinging ? `game__timer--blink` : ``}">${this._time}</div>`;
   }
 }
 

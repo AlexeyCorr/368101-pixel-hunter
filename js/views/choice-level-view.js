@@ -5,16 +5,16 @@ class ChoiceLevelView extends AbstractView {
   constructor({game = {}, wide = false} = {}) {
     super();
 
-    this.level = game;
-    this.wide = wide;
+    this._level = game;
+    this._wide = wide;
   }
 
   get template() {
     return `
       <section class="game">
-      <p class="game__task">${this.level.question}</p>
-      <form class="game__content ${this.wide ? `game__content--wide` : ``}">
-        ${[...this.level.answers].map((it, index) => `<div class="game__option" data-type="${it.type}">
+      <p class="game__task">${this._level.question}</p>
+      <form class="game__content ${this._wide ? `game__content--wide` : ``}">
+        ${[...this._level.answers].map((it, index) => `<div class="game__option" data-type="${it.type}">
           <img src="${it.image.url || `http://placehold.it/468x458`}" alt="Option ${index}" width="${it.image.width}" height="${it.image.height}">
           <label class="game__answer game__answer--photo">
             <input class="visually-hidden" name="question${index}" type="radio" value="photo">
