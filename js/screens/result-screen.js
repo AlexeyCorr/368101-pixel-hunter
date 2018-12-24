@@ -9,13 +9,13 @@ class ResultScreen {
     this.header = document.createElement(`header`);
     this.header.classList.add(`header`);
     this.header.appendChild(this.backButton.element);
-    this.root = document.createElement(`div`);
-    this.root.appendChild(this.header);
-    this.root.appendChild(this.content.element);
+    this._root = document.createElement(`div`);
+    this._root.appendChild(this.header);
+    this._root.appendChild(this.content.element);
   }
 
   get element() {
-    return this.root;
+    return this._root;
   }
 }
 

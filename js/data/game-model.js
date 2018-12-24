@@ -8,9 +8,9 @@ import {
 
 class GameModel {
   constructor(data, playerName) {
-    this.data = data;
+    this._data = data;
     this.playerName = playerName;
-    this.restart();
+    this._restart();
   }
 
   get state() {
@@ -30,10 +30,10 @@ class GameModel {
   }
 
   canContinue() {
-    return !this.isDead() && this.hasNextLevel();
+    return !this._isDead() && this._hasNextLevel();
   }
 
-  hasNextLevel() {
+  _hasNextLevel() {
     return this._state.level + 1 !== Limit.QUESTIONS;
   }
 
@@ -49,20 +49,20 @@ class GameModel {
     this._state = die(this._state);
   }
 
-  restart() {
+  _restart() {
     this._state = InitialGame;
   }
 
-  isDead() {
+  _isDead() {
     return this._state.lives <= 0;
   }
 
-  getLevel(level) {
-    return this.data[level];
+  _getLevel(level) {
+    return this._data[level];
   }
 
   getCurrentLevel() {
-    return this.getLevel(this._state.level);
+    return this._getLevel(this._state.level);
   }
 
   tick() {

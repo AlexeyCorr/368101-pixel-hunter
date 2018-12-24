@@ -3,12 +3,12 @@ import Application from './../application';
 
 class WelcomScreen {
   constructor() {
-    this.welcomeView = new WelcomView();
-    this.welcomeView.onClick = this.onClick;
+    this._welcomeView = new WelcomView();
+    this._welcomeView.onClick = this.onClick;
   }
 
   get element() {
-    return this.welcomeView.element;
+    return this._welcomeView.element;
   }
 
   onClick() {

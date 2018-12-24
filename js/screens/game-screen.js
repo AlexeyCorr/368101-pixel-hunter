@@ -9,13 +9,13 @@ import {InitialGame} from './../data/game';
 
 class GameScreen {
   constructor(model) {
-    this.model = model;
+    this._game = model;
 
     this.backButton = new BackButtonView();
-    this.timer = new TimerView({time: this.model.state.time, blink: this.model.state.time <= 5});
-    this.lives = new LivesView(this.model.state);
-    this.gameContent = this.getGameView(this.model.getCurrentLevel());
-    this.stats = new StatsView(this.model.state);
+    this.timer = new TimerView({time: this._game.state.time, blink: this._game.state.time <= 5});
+    this.lives = new LivesView(this._game.state);
+    this.gameContent = this._getGameView(this._game.getCurrentLevel());
+    this.stats = new StatsView(this._game.state);
 
     this.header = document.createElement(`header`);
     this.header.classList.add(`header`);
@@ -23,39 +23,39 @@ class GameScreen {
     this.header.appendChild(this.timer.element);
     this.header.appendChild(this.lives.element);
 
-    this.root = document.createElement(`div`);
-    this.root.appendChild(this.header);
-    this.root.appendChild(this.gameContent.element);
-    this.root.appendChild(this.stats.element);
+    this._root = document.createElement(`div`);
+    this._root.appendChild(this.header);
+    this._root.appendChild(this.gameContent.element);
+    this._root.appendChild(this.stats.element);
 
     this._interval = null;
   }
 
   get element() {
-    return this.root;
+    return this._root;
   }
 
   onAnswer(answer) {
-    this.stopGame();
+    this._stopGame();
     const result = {
       isCorrect: answer,
-      time: InitialGame.time - this.model.state.time
+      time: InitialGame.time - this._game.state.time
     };
     if (!result.isCorrect) {
-      this.model.die();
+      this._game.die();
     }
-    let stat = this.model.getStats(result);
-    this.model.addStats(stat);
-    this.model.addAnswer(result);
-    this.updateStats();
-    if (this.model.canContinue()) {
-      this.model.nextLevel();
+    let stat = this._game.getStats(result);
+    this._game.addStats(stat);
+    this._game.addAnswer(result);
+    this._updateStats();
+    if (this._game.canContinue()) {
+      this._game.nextLevel();
       this.startGame();
-      this.changeLevel();
+      this._changeLevel();
     } else {
       this.endGame();
     }
-    this.model.state.time = 30;
+    this._game.state.time = 30;
   }
 
   imageResize(image) {
@@ -67,13 +67,13 @@ class GameScreen {
       width: image.naturalWidth,
       height: image.naturalHeight
     };
-    const optimizedSize = this.model.imageResize(frame, given);
+    const optimizedSize = this._game.imageResize(frame, given);
 
     image.width = optimizedSize.width;
     image.height = optimizedSize.height;
   }
 
-  getGameView(level) {
+  _getGameView(level) {
     const levelType = level.type;
     const isCorrect = (model) => {
       return model.answers
@@ -96,51 +96,51 @@ class GameScreen {
     return view;
   }
 
-  stopGame() {
+  _stopGame() {
     clearInterval(this._interval);
   }
 
   startGame() {
     this._interval = setInterval(() => {
-      this.model.tick();
-      if (this.model.state.time === 0) {
+      this._game.tick();
+      if (this._game.state.time === 0) {
         this.onAnswer(false);
       }
-      this.updateTimer();
+      this._updateTimer();
     }, 1000);
   }
 
-  updateTimer() {
-    const timer = new TimerView({time: this.model.state.time, blink: this.model.state.time <= 5});
+  _updateTimer() {
+    const timer = new TimerView({time: this._game.state.time, blink: this._game.state.time <= 5});
     this.header.replaceChild(timer.element, this.timer.element);
     this.timer = timer;
   }
 
-  updateLives() {
-    const lives = new LivesView(this.model.state);
+  _updateLives() {
+    const lives = new LivesView(this._game.state);
     this.header.replaceChild(lives.element, this.lives.element);
     this.lives = lives;
   }
 
-  updateStats() {
-    const stats = new StatsView(this.model.state);
-    this.root.replaceChild(stats.element, this.stats.element);
+  _updateStats() {
+    const stats = new StatsView(this._game.state);
+    this._root.replaceChild(stats.element, this.stats.element);
     this.stats = stats;
   }
 
-  changeLevel() {
-    this.updateLives();
-    this.updateTimer();
-    const level = this.getGameView(this.model.getCurrentLevel());
+  _changeLevel() {
+    this._updateLives();
+    this._updateTimer();
+    const level = this._getGameView(this._game.getCurrentLevel());
     this.changeContentView(level);
   }
 
   endGame() {
-    Application.showResult(this.model);
+    Application.showResult(this._game);
   }
 
   changeContentView(view) {
-    this.root.replaceChild(view.element, this.gameContent.element);
+    this._root.replaceChild(view.element, this.gameContent.element);
     this.gameContent = view;
   }
 }

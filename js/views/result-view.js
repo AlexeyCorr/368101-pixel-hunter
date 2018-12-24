@@ -9,14 +9,14 @@ class ResultView extends AbstractView {
   constructor(model) {
     super();
 
-    this.model = model;
+    this._game = model;
   }
 
   get template() {
     return `
       <section class="result">
-        <h2 class="result__title">${this.model[this.model.length - 1].playerName} вы ${this.model[this.model.length - 1]._state.lives === 0 ? `проиграли!` : `победили!`}</h2>
-        ${this.model.reverse().map((game, index) => `
+        <h2 class="result__title">${this._game[this._game.length - 1].playerName} вы ${this._game[this._game.length - 1]._state.lives === 0 ? `проиграли!` : `победили!`}</h2>
+        ${this._game.reverse().map((game, index) => `
         <table class="result__table">
           <tr>
             <td class="result__number">${index + 1}.</td>
