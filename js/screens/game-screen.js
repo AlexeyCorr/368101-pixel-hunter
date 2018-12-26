@@ -8,8 +8,9 @@ import Application from './../application';
 import {InitialGame} from './../data/game';
 
 class GameScreen {
-  constructor(model) {
+  constructor(model, images) {
     this._game = model;
+    this._images = images;
 
     const backButton = new BackButtonView();
     this._timer = new TimerView({time: this._game.state.time, blink: this._game.state.time <= 5});
@@ -58,22 +59,12 @@ class GameScreen {
     this._game.state.time = 30;
   }
 
-  imageResize(image) {
-    const frame = {
-      width: image.parentNode.clientWidth,
-      height: image.parentNode.clientHeight
-    };
-    const given = {
-      width: image.naturalWidth,
-      height: image.naturalHeight
-    };
-    const optimizedSize = this._game.imageResize(frame, given);
-
-    image.width = optimizedSize.width;
-    image.height = optimizedSize.height;
+  insertImages(option, index, images) {
+    option.appendChild(images[index]);
   }
 
   _getGameView(level) {
+    const images = this._images[this._game.state.level];
     const levelType = level.type;
     const isCorrect = (model) => {
       return model.answers
@@ -83,15 +74,15 @@ class GameScreen {
     };
 
     const gameView = {
-      'tinder-like': new ChoiceLevelView({game: level, wide: true}),
-      'two-of-two': new ChoiceLevelView({game: level, wide: false}),
-      'one-of-three': new FindLevelView({game: level, isCorrect: isCorrect(level)})
+      'tinder-like': new ChoiceLevelView({game: level, wide: true, images}),
+      'two-of-two': new ChoiceLevelView({game: level, wide: false, images}),
+      'one-of-three': new FindLevelView({game: level, isCorrect: isCorrect(level), images})
     };
 
     const view = gameView[levelType];
 
     view.onAnswer = this._onAnswer.bind(this);
-    view.onImageLoad = this.imageResize.bind(this);
+    view.onInsertImages = this.insertImages.bind(this);
 
     return view;
   }

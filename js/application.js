@@ -7,6 +7,7 @@ import GameModel from './data/game-model';
 import GameScreen from './screens/game-screen';
 import ErrorPopupView from './views/error-popup-view';
 import SplashView from './views/splash-view';
+import {preloadImage} from './data/game';
 
 const main = document.querySelector(`main`);
 
@@ -16,6 +17,7 @@ const changeView = (element) => {
 };
 
 let gameData;
+let images;
 
 class Application {
   static async load() {
@@ -25,6 +27,7 @@ class Application {
     splash.show();
     try {
       gameData = await Loader.loadData();
+      images = await Promise.all(preloadImage(gameData));
       Application.showWelcome();
     } catch (error) {
       Application.showErrorPopup(error);
@@ -44,7 +47,7 @@ class Application {
   }
 
   static showGame(playerName) {
-    const gameScreen = new GameScreen(new GameModel(gameData, playerName));
+    const gameScreen = new GameScreen(new GameModel(gameData, playerName), images);
     changeView(gameScreen.element);
     gameScreen.startGame();
   }

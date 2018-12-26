@@ -2,7 +2,7 @@ import {
   InitialGame,
   die, tick,
   changeLevel,
-  resize, ResultType,
+  ResultType,
   Limit
 } from './game';
 
@@ -35,10 +35,6 @@ class GameModel {
 
   _hasNextLevel() {
     return this._state.level + 1 !== Limit.QUESTIONS;
-  }
-
-  imageResize(frame, given) {
-    return resize(frame, given);
   }
 
   nextLevel() {

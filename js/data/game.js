@@ -102,3 +102,31 @@ export const resize = (frame, given) => {
   return obj;
 };
 
+export const preloadImage = (data) => data.map(({answers}) => {
+  const images = answers.map(({image}, index) => {
+    const {url, width, height} = image;
+    const img = new Image();
+
+    return new Promise((resolve, reject) => {
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error(`Error loading "${url}"`));
+      img.src = url;
+      img.alt = `Option ${index + 1}`;
+
+      const frame = {
+        width,
+        height
+      };
+      const given = {
+        width: img.naturalWidth,
+        height: img.naturalHeight
+      };
+      const resizeSize = resize(frame, given);
+
+      img.width = resizeSize.width;
+      img.height = resizeSize.height;
+    });
+  });
+
+  return Promise.all(images);
+});

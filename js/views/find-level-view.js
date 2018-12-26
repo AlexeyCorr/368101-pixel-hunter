@@ -2,11 +2,12 @@ import AbstractView from './../abstract-view';
 import {isDebug, debugStyle} from './../settings';
 
 class FindLevelView extends AbstractView {
-  constructor({game = {}, isCorrect = ``} = {}) {
+  constructor({game = {}, isCorrect = ``, images = []} = {}) {
     super();
 
     this._level = game;
     this._isCorrect = isCorrect;
+    this._images = images;
   }
 
   get template() {
@@ -14,27 +15,22 @@ class FindLevelView extends AbstractView {
       <section class="game">
       <p class="game__task">${this._level.question}</p>
       <form class="game__content game__content--triple">
-        ${[...this._level.answers].map((it, index) =>`<div class="game__option" style="${isDebug(it.type, this._isCorrect) ? debugStyle : ``}" data-type="${it.type}">
-        <img src="${it.image.url || `http://placehold.it/304x455`}" alt="Option ${index}" width="304" height="455">
+        ${[...this._level.answers].map((it) =>`<div class="game__option" style="${isDebug(it.type, this._isCorrect) ? debugStyle : ``}" data-type="${it.type}">
         </div>`).join(``)}
       </form>
     </section>`;
   }
 
   bind() {
-    const images = this.element.querySelectorAll(`.game__option > img`);
-    images.forEach((image) => {
-      image.addEventListener(`load`, () => {
-        this.onImageLoad(image);
-      });
-    });
+    const options = this.element.querySelectorAll(`.game__option`);
+    options.forEach((option, index) => {
 
-    const answerButton = this.element.querySelectorAll(`.game__option`);
-    answerButton.forEach((it) => {
-      it.addEventListener(`click`, (evt) => {
+      this.onInsertImages(option, index, this._images);
+
+      option.addEventListener(`click`, (evt) => {
         evt.preventDefault();
-        const answer = it.dataset.type === this._isCorrect;
-        it.classList.add(`game__option--selected`);
+        const answer = option.dataset.type === this._isCorrect;
+        option.classList.add(`game__option--selected`);
         this.onAnswer(answer);
       });
     });
@@ -42,7 +38,7 @@ class FindLevelView extends AbstractView {
 
   onAnswer() {}
 
-  onImageLoad() {}
+  onInsertImages() {}
 }
 
 export default FindLevelView;
