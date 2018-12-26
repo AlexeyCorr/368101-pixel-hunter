@@ -121,10 +121,10 @@ export const preloadImage = (data) => data.map(({answers}) => {
         width: img.naturalWidth,
         height: img.naturalHeight
       };
-      const resizeSize = resize(frame, given);
+      const optimizedSize = resize(frame, given);
 
-      img.width = resizeSize.width;
-      img.height = resizeSize.height;
+      img.width = optimizedSize.width;
+      img.height = optimizedSize.height;
 
       return img;
     });
