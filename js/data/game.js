@@ -112,7 +112,7 @@ export const preloadImage = (data) => data.map(({answers}) => {
       img.onerror = () => reject(new Error(`Error loading "${url}"`));
       img.src = url;
       img.alt = `Option ${index + 1}`;
-
+    }).then(() => {
       const frame = {
         width,
         height
@@ -125,6 +125,8 @@ export const preloadImage = (data) => data.map(({answers}) => {
 
       img.width = resizeSize.width;
       img.height = resizeSize.height;
+
+      return img;
     });
   });
 
